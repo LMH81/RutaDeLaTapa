@@ -16,14 +16,17 @@
         <form action="{{ url('/del-cookie')}}" class= "d-inline" method="get">
             @csrf
             {{-- {{method_field('DELETE')}} --}}
-            <input class="btn btn-danger" type="submit" onclick= "return confirm('¿ Estás seguro?')" value="Rechazar">
+            <input class="btn btn-danger" type="submit" onclick= "return confirm('¿Estás seguro?')" value="Rechazar">
         </form>              
 </div>
 @endif
 
-<h1>Elije una tapa y vota</h1>
-<p>Bienvenido a la ruta de la tapa</p>
+<div class="text-center mx-auto my-5">
+        <h1>Elije una tapa y vota</h1>
+        <p>Bienvenido a la ruta de la tapa</p>
+</div>
 @endsection
+
 
 @section('scripts')
 @if (!request()->hasCookie('cookie_consent'))

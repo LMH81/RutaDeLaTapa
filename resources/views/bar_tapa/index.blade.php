@@ -19,22 +19,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
-                           
-                            @if(isset($tapas))
-                            {{ dd($tapas) }}
+                            @if(isset($bar_tapas)) 
+                            @foreach ($bar_tapas as $tapa)
 
-                            @foreach ($tapas as $tapa)
                             <tr>
-                                <td>{{$tapa->name}}</td>
-                                <td>
-                                    @foreach ($tapa->bars as $bar)
-                                    {{$bar->name}} <br>
-                                    @endforeach
-                                </td>
+                                <td>{{$tapa->tapa_id}}</td>
+                                <td>{{$tapa->bar_id}}</td>
+                               
                             </tr>
+                            
                             @endforeach
-                        @endif
+
+                            @endif
+                                                        
+                        
                         </tbody>
                     </table>
                 </div>

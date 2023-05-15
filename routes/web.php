@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BarController;
 use App\Http\Controllers\BarTapaController;
 use App\Http\Controllers\CookiesController;
-use App\Models\Tapa;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -62,7 +63,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     // // Route::resource('bar_tapa', App\Http\Controllers\BarTapaController::class);
 
-    Route::get('/bar_tapa','App\Http\Controllers\BarTapaController@index')->name('bar_tapa.index');    
+    
+
+    Route::get('/bar_tapa', [BarTapaController::class, 'index'])->name('bar_tapa.index');
+
+
+    //Route::get('/bar_tapa','App\Http\Controllers\BarTapaController@index')->name('bar_tapa.index');    
     Route::get('/bar_tapa/create','App\Http\Controllers\BarTapaController@create')->name('bar_tapa.create');
     Route::post('/bar_tapa','App\Http\Controllers\BarTapaController@store')->name('bar_tapa.store');
     Route::get('/bar_tapa/{id}/edit','App\Http\Controllers\BarTapaController@edit')->name('bar_tapa.edit');
