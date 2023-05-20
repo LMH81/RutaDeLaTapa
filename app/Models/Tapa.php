@@ -9,6 +9,7 @@ class Tapa extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'img', 'description', 'price'];
     
 
     //Relación muchos a muchos

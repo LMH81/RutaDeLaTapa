@@ -17,8 +17,7 @@ class TapaController extends Controller
 
     public function index()
 {
-
-    $tapas = Tapa::paginate();
+    $tapas = Tapa::paginate(5);
     return view('tapa.index', compact('tapas'))
         ->with('i', (request()->input('page', 1) - 1) * $tapas->perPage());
 }

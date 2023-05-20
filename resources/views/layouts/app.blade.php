@@ -17,7 +17,7 @@
         }
 
         .navbar-nav li a {
-        color: #fff;
+        color: #fff;       
         font-weight: bold;
         }
         

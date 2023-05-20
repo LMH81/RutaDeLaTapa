@@ -38,7 +38,9 @@ Route::get('/home', function () {
 Route::group(['middleware' => 'auth'], function () {
 
     /*---------------------Rutas TapaController-------------------------------------*/
-    Route::get('/tapa/pdf', [App\Http\Controllers\TapaController::class, 'pdf'])->name('tapa.pdf');   
+    Route::get('/tapa/chartbar', [App\Http\Controllers\ChartController::class, 'chartbar'])->name('tapa.chart'); ;   
+    Route::get('/tapa/pdf', [App\Http\Controllers\TapaController::class, 'pdf'])->name('tapa.pdf'); 
+    
     Route::resource('tapa', TapaController::class);
            
         
@@ -64,8 +66,10 @@ Route::group(['middleware' => 'auth'], function () {
     // // Route::resource('bar_tapa', App\Http\Controllers\BarTapaController::class);
 
     
-
-    Route::get('/bar_tapa', [BarTapaController::class, 'index'])->name('bar_tapa.index');
+    Route::resource('bar_tapa/index', BarTapaController::class);
+    //Route::get('/bar_tapa', [BarTapaController::class, 'index'])->name('bar_tapa.index');
+           
+    //Route::get('/bar_tapa', [BarTapaController::class, 'index'])->name('bar_tapa.index');
 
 
     //Route::get('/bar_tapa','App\Http\Controllers\BarTapaController@index')->name('bar_tapa.index');    

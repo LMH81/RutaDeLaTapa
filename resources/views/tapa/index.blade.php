@@ -26,6 +26,7 @@
 
 <a href="{{ url('tapa/create')}}" class="btn btn-primary">Registrar nueva tapa</a>&nbsp;&nbsp;
 <a href="{{ url('tapa/pdf')}}" class="btn btn-success float-right">PDF</a>
+<a href="{{ url('tapa/chartbar')}}" class="btn btn-warning float-right">Gráfica</a>
 <br/><br/>
 <div class="table-responsive">
     <table class="table table-striped
@@ -49,7 +50,7 @@
             </thead>
 
             <tbody class="table-group-divider">
-
+                
                 @foreach ($tapas as $tapa)        
           
                
@@ -99,7 +100,7 @@
             </tfoot>
     </table>
 
-    {!! $tapas->links()!!}
+    {!! $tapas->links('pagination::bootstrap-5')!!}
 </div>
 </div>
 @endsection
