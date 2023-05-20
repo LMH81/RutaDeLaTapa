@@ -23,6 +23,8 @@
             </div>
         </div>
 
+        <h1 style="text-align: center;">Precio de las Tapas</h1>
+
         <div id="piechart" style="width: 900px; height: 500px;"></div>
 
         <script type="text/javascript">
