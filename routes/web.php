@@ -36,12 +36,14 @@ Route::get('/home', function () {
     })->name('dashboard');
 
 Route::group(['middleware' => 'auth'], function () {
+    
 
     /*---------------------Rutas TapaController-------------------------------------*/
+    Route::resource('tapa', TapaController::class);
     Route::get('/tapa/chartbar', [App\Http\Controllers\ChartController::class, 'chartbar'])->name('tapa.chart'); ;   
     Route::get('/tapa/pdf', [App\Http\Controllers\TapaController::class, 'pdf'])->name('tapa.pdf'); 
     
-    Route::resource('tapa', TapaController::class);
+   
            
         
 
@@ -59,12 +61,13 @@ Route::group(['middleware' => 'auth'], function () {
     // /*-------------------------Rutas BarTapaController--------------------------*/
 
      
-    Route::resource('bar_tapa', BarTapaController::class);
-   
+    Route::resource('bar_tapa', BarTapaController::class); 
            
     
 
    /*------------------------Rutas Autorizadas------------------------------*/ 
+
+    
 
     Route::get('tapa', function () {
         //Gate::authorize('tapa');
@@ -73,18 +76,18 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('tapa');
 
     Route::get('bars', function () {
-        //Gate::authorize('bars');
+       
         $bars = App\Models\Bar::paginate(10);
         return view('bar.index', compact('bars'));
     })->name('bars');
 
     Route::get('bar_tapa', function () {
-       // Gate::authorize('bar_tapa');
-        return view('bar_tapa.index');
+        $bar_tapas = App\Models\Bar_Tapa::paginate(10);
+        return view('bar_tapa.index',compact('bar_tapas') );
     })->name('bar_tapa');
 
     Route::get('vote-tapa', function () {
-       // Gate::authorize('vote-tapa');
+       
         return view('vote_tapa.index');
     })->name('vote-tapa');
 

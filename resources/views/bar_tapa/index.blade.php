@@ -14,32 +14,30 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Bar</th>
-                                <th>Tapa</th>
-                                
+                                <th>Bares</th>
+                                <th>Tapas</th>
                             </tr>
                         </thead>
-                        <tbody>                           
-                        @if(isset($bars))                         
-                            @foreach ($bars as $bar)
-                            <tr>
-                                <td>{{ $bar->name }}</td>
-                                
-                                <td>
-                                    @foreach ($bar->tapas as $tapa)
-                                    {{$tapa->name}} <br>
-                                    @endforeach
-                                </td>
-                            </tr>
-                            @endforeach
-                        @endif                                                        
+                        <tbody>
+                           
+                    @if(isset($bar_tapas))  
+                        
+                           @foreach ($bar_tapas as $tapa)
+                           <tr>
+                               <td>{{ $tapa->id }}</td>
+                               <td>{{ $tapa->bar_id }}</td>
+                           </tr>
+                       @endforeach
+
+                        @endif 
+                                                        
+                        
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        
-
+        {{ $bar_tapas->links() }}
     </div>
 </div>
 @endsection

@@ -17,58 +17,18 @@ class BarTapaController extends Controller
 
     /*------------------Index--------------------------------*/
 
-    // public function index()
-    // {
-    //     $bar_tapas = Bar_Tapa::all();
-    //     dd($bar_tapas);
-    //     return view('bar_tapa.index', compact('bar_tapas'));
-    // }
-  
+    public function index()
+    {
+        $bar_tapas = Bar_Tapa::paginate(10); // Cambia el nombre del modelo si es diferente
+        return view('bar_tapa.index', compact('bar_tapas'));
+    }
     
-//     public function index()
+  // public function index()
 // {
-//     $tapas = Tapa::with(['bars'])->get();
-//     //dd($tapas); // Agregar esta línea
-//     $bars = Bar::with(['tapas'])->get();   
-//     return view('bar_tapa',compact('tapas','bars'));
+//     $bars = Bar::with(['tapas'])->get();
 
+//     return view('bar_tapa', compact('bars'));
 // }
-
-
-
-// public function index () {
-//     $tapa= Tapa::find(1);
-//     $bar= Bar::find(19);
-
-//     return view('bar_tapa', compact('tapa', 'bar'));
-// }
-
-
-// public function index()
-// {
-//     $bar_tapas = Bar_Tapa::with('tapas', 'bars')->get();
-
-//     return view('bar_tapa.index', compact('bar_tapas'));
-// }
-
-// public function index()
-// {
-//     $bar_tapas = Bar_Tapa::all();
-//     $pivot_table = $bar_tapas->pluck('id')->toArray();
-//     $pivot_data = DB::table('bar_tapa')->whereIn('bar_tapa_id', $pivot_table)->get();
-//     return view('bar_tapa.index')->with('bar_tapas', $bar_tapas)->with('pivot_data', $pivot_data);
-// }
-
-
-
-
-
-public function index()
-{
-    $bars = Bar::with(['tapas'])->get();
-
-    return view('bar_tapa', compact('bars'));
-}
 
  /*------------------Crear--------------------------------*/
 
