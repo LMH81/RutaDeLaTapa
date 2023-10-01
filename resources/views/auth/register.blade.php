@@ -76,7 +76,7 @@
                             </div>
                         </div>
 <!--------------------------Administrador------------------------------------>
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <label for="admin" class="col-md-4 col-form-label text-md-end">{{ __('Administrador?') }}</label>
                             <div class="col-md-6">
                                 <select id="admin" class="form-control @error('admin') is-invalid @enderror" name="admin">
@@ -89,7 +89,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                         
 
 <!--------------------------Botón------------------------------------>

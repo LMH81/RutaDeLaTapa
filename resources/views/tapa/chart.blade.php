@@ -13,19 +13,19 @@
     </head>
 
     <body>
-        <div style="margin-top: 20px;">
-            <h1 style="text-align: center;">Precio de las Tapas</h1>
+        <div class="mt-4">
+            <h1 class="text-center">Precio de las Tapas</h1>
             <div class="float-right">
                 <a class="btn btn-primary" href="{{ route('tapa') }}"> {{ __('Ir a lista de tapas') }}</a>
             </div>
             <div class="container-fluid p-5">
-                <div id="barchart" style="width: 100%; height: 500px;"></div>
+                <div id="barchart" class="w-100" style="height: 500px;"></div>
             </div>
         </div>
 
-        <h1 style="text-align: center;">Precio de las Tapas</h1>
+        <h1 class="text-center mt-4">Precio de las Tapas</h1>
 
-        <div id="piechart" style="width: 900px; height: 500px;"></div>
+        <div id="piechart" class="w-100" style="height: 500px;"></div>
 
         <script type="text/javascript">
             google.charts.load('current', {'packages': ['bar', 'corechart']});
@@ -59,7 +59,7 @@
                     titleTextStyle: {
                         color: '#333',
                         fontSize: 18,
-                        bold: true
+                        fontWeight: 'bold'
                     },
                 };
 

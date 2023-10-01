@@ -21,17 +21,21 @@ class StoreBarTapaRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
-    {
-        return [
-            //
-        'tapa_id' => 'required|exists:tapas,id',
-        'bars' => 'array|required',
-        'bars.*' => 'exists:bars,id',         
-        'name'=> 'required|string|max:100',
-        'img'=>'required|max:10000|mimes:jpg,png,jpg',   
-        'description' => 'required|string|max:2000',
-        'price' => 'required|numeric|between:0,99.99',
-        ];
-    }
+   
+        public function rules()
+        {
+            return [
+                'tapas' => 'required|array|exists:tapas,id',
+                'bars' => 'required|array',
+                'bars.*' => 'exists:bars,id',
+                'name' => 'required|string|max:100',
+                'img' => 'required|max:10000|mimes:jpg,png,jpg',
+                'description' => 'required|string|max:2000',
+                'price' => 'required|numeric|between:0,99.99',
+            ];
+        }
+    
+    
+
+    
 }

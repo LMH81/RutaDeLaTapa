@@ -11,6 +11,11 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <!-- importar los estilos de Bootstrap -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <style>
         .bg-color {
         background-color: #a5b6a5;
@@ -48,26 +53,29 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                    
+                    @role('admin')                    
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('tapa') }}">{{ __('Tapas') }}</a>
-
                             </li>
+                        
                        
+                      
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('bars') }}">{{ __('Bares') }}</a>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('bars') }}">{{ __('Bares') }}</a>
+                        </li> 
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('bar_tapa') }}">{{ __('Bar_Tapa') }}</a>
 
-                    </li> 
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('bar_tapa') }}">{{ __('Bar_Tapa') }}</a>
-
-                    </li>
+                        </li>
+                    @endrole
+                    @unlessrole('admin')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('vote-tapa') }}">{{ __('Votar') }}</a>
 
                     </li>
+                    @endunless
 
                     </ul>
 

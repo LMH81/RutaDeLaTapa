@@ -21,10 +21,12 @@
 </div>
 @endif
 
+@unlessrole('admin')
 <div class="text-center mx-auto my-5">
         <h1>Elije una tapa y vota</h1>
         <p>Bienvenido a la ruta de la tapa</p>
 </div>
+@endunless
 @endsection
 
 

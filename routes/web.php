@@ -58,49 +58,33 @@ Route::group(['middleware' => 'auth'], function () {
 
     // /*-------------------------Rutas BarTapaController--------------------------*/
 
-    // // Route::get('bar-tapa', 'BarTapaController@index')->name('bar_tapa.index');
-    // // Route::get('bar-tapa/create', 'BarTapaController@create')->name('bar_tapa.create');
-    // // Route::post('bar-tapa/assign', 'BarTapaController@assign')->name('bar_tapa.assign');
-    // // Route::post('bar-tapa/delete', 'BarTapaController@delete')->name('bar_tapa.delete');
-
-    // // Route::resource('bar_tapa', App\Http\Controllers\BarTapaController::class);
-
-    
-    Route::resource('bar_tapa/index', BarTapaController::class);
-    //Route::get('/bar_tapa', [BarTapaController::class, 'index'])->name('bar_tapa.index');
+     
+    Route::resource('bar_tapa', BarTapaController::class);
+   
            
-    //Route::get('/bar_tapa', [BarTapaController::class, 'index'])->name('bar_tapa.index');
-
-
-    //Route::get('/bar_tapa','App\Http\Controllers\BarTapaController@index')->name('bar_tapa.index');    
-    Route::get('/bar_tapa/create','App\Http\Controllers\BarTapaController@create')->name('bar_tapa.create');
-    Route::post('/bar_tapa','App\Http\Controllers\BarTapaController@store')->name('bar_tapa.store');
-    Route::get('/bar_tapa/{id}/edit','App\Http\Controllers\BarTapaController@edit')->name('bar_tapa.edit');
-    Route::put('/bar_tapa/{id}','App\Http\Controllers\BarTapaController@update')->name('bar_tapa.update');
-    Route::delete('/bar_tapa/{id}','App\Http\Controllers\BarTapaController@destroy')->name('bar_tapa.delete');
-
+    
 
    /*------------------------Rutas Autorizadas------------------------------*/ 
 
     Route::get('tapa', function () {
-        Gate::authorize('tapa');
+        //Gate::authorize('tapa');
         $tapas = App\Models\Tapa::paginate(10);
         return view('tapa.index', compact('tapas'));
     })->name('tapa');
 
     Route::get('bars', function () {
-        Gate::authorize('bars');
+        //Gate::authorize('bars');
         $bars = App\Models\Bar::paginate(10);
         return view('bar.index', compact('bars'));
     })->name('bars');
 
     Route::get('bar_tapa', function () {
-        Gate::authorize('bar_tapa');
+       // Gate::authorize('bar_tapa');
         return view('bar_tapa.index');
     })->name('bar_tapa');
 
     Route::get('vote-tapa', function () {
-        Gate::authorize('vote-tapa');
+       // Gate::authorize('vote-tapa');
         return view('vote_tapa.index');
     })->name('vote-tapa');
 

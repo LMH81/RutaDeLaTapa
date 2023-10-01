@@ -15,8 +15,8 @@ class Bar extends Model
   
     public function tapas()
     {
-         return $this->belongsToMany('App\Models\Tapa', 'bar_tapa')->withTimestamps();
-                        
+         //return $this->belongsToMany('App\Models\Tapa', 'bar_tapa')->withTimestamps();
+         return $this->belongsToMany(Tapa::class, 'bar_tapa', 'bar_id', 'tapa_id')->withTimestamps();           
     }
 
     

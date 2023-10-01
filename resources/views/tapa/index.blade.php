@@ -100,7 +100,9 @@
             </tfoot>
     </table>
 
-    {!! $tapas->links('pagination::bootstrap-5')!!}
+    <div class="pagination">
+        {{ $tapas->links() }}
+    </div>
 </div>
 </div>
 @endsection

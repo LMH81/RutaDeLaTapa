@@ -8,12 +8,12 @@ use App\Models\Bar;
 
 class Bar_Tapa extends Model
 {
-    // protected $table = 'bar_tapa';
+    protected $table = 'bar_tapa';
 
-    // protected $fillable = [
-    //     'bar_id',
-    //     'tapa_id',
-    // ];
+    protected $fillable = [
+        'bar_id',
+        'tapa_id',
+    ];
 
     public function tapas()
     {

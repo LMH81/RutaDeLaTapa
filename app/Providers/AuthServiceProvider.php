@@ -27,21 +27,21 @@ class AuthServiceProvider extends ServiceProvider
 
 
 
-        //Le estamos dando permisos
-        Gate::define('tapa', function (User $user) {
-            return $user->admin == User::ROLE_ADMINISTRATOR;
-        });
+        // //Le estamos dando permisos
+        // Gate::define('tapa', function (User $user) {
+        //     return $user->admin == User::ROLE_ADMINISTRATOR;
+        // });
 
-        Gate::define('bars', function (User $user) {
-            return $user->admin == User::ROLE_ADMINISTRATOR;
-        });
-        Gate::define('bar_tapa', function (User $user) {
-            return $user->admin == User::ROLE_ADMINISTRATOR;
-        });       
+        // Gate::define('bars', function (User $user) {
+        //     return $user->admin == User::ROLE_ADMINISTRATOR;
+        // });
+        // Gate::define('bar_tapa', function (User $user) {
+        //     return $user->admin == User::ROLE_ADMINISTRATOR;
+        // });       
         
-        Gate::define('vote-tapa', function (User $user) {
-            return $user->admin == User::ROLE_USER;
-        });
+        // Gate::define('vote-tapa', function (User $user) {
+        //     return $user->admin == User::ROLE_USER;
+        // });
 
         //
     }

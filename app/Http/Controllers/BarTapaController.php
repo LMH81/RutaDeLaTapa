@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Bar;
 use App\Models\Tapa;
 use App\Models\Bar_Tapa;
-use Illuminate\Support\Facades\DB;
+
 
 
 
@@ -16,6 +17,14 @@ class BarTapaController extends Controller
 
     /*------------------Index--------------------------------*/
 
+    // public function index()
+    // {
+    //     $bar_tapas = Bar_Tapa::all();
+    //     dd($bar_tapas);
+    //     return view('bar_tapa.index', compact('bar_tapas'));
+    // }
+  
+    
 //     public function index()
 // {
 //     $tapas = Tapa::with(['bars'])->get();
@@ -33,18 +42,6 @@ class BarTapaController extends Controller
 
 //     return view('bar_tapa', compact('tapa', 'bar'));
 // }
-
-public function index ()
-{
-    $bar_tapa = Bar_Tapa::all();
-    //$bar_tapas = Bar_Tapa::paginate();
-    //dd($bar_tapas);
-    return view('bar_tapa.index', compact('bar_tapa'));
-
-    
-}
-
-
 
 
 // public function index()
@@ -64,27 +61,16 @@ public function index ()
 
 
 
-// public function index()
-// {
-//     $tapas = Tapa::all();
-//     dd($tapas); // Agregar esta línea
-
-//     $bars = Bar::all();
-    
-//     return view('bar_tapa.index', compact('tapas','bars'));
-// }
 
 
+public function index()
+{
+    $bars = Bar::with(['tapas'])->get();
 
+    return view('bar_tapa', compact('bars'));
+}
 
  /*------------------Crear--------------------------------*/
-
-// public function create()
-// {
-//     $listaTapas = Tapa::pluck('name', 'id');
-//     $bars = Bar::pluck('name', 'id');
-//     return view('bar_tapa.create', compact('listaTapas', 'bars'));
-// }
 
 public function create()
     {
@@ -94,7 +80,7 @@ public function create()
         return view('bar_tapa.create', compact('bars','tapas'));
     }
 
- 
+
 public function store(Request $request)
 {
     $rules = [
@@ -122,57 +108,11 @@ public function store(Request $request)
         }
     }
 
-    // Comprobar si los datos se guardan correctamente
-    //dd('Datos guardados correctamente.');
-
+    
     // Redireccionar a la vista bar:tapa.index con un mensaje de éxito
     return redirect()->route('bar_tapa')->with('success', 'Tapa asignada exitosamente.');
 }
 
-
-// $campos=[
-
-//     'name'=> 'required|string|max:100',
-//     'img'=>'required|max:10000|mimes:jpg,png,jpg',
-//     'description' => 'required|string|max:2000',
-//     'price' => 'required|numeric|between:0,99.99',
-
-//  ];
-//  $mensaje=[
-//      'required'=> 'El nombre es requerido',
-//      'price.required'=>'El precio es requerido',
-//      'description.required'=> 'La descripción es requerida',
-//      'img.required'=>'La foto es requerida'
-//  ];
-
-//  $this->validate($request,$campos,$mensaje);
-// //$datosTapas= request()->all();
-// $datosTapas= request()->except('_token');
-
-// if($request->hasFile('img')){
-
-//     $datosTapas['img']=$request->file('img')->store('uploads','public');
-// }
-// Tapa::insert($datosTapas);
-// //return response()->json($datosTapas);
-// return redirect('tapa')->with('mensaje','Tapa agregada correctamente');
-
-
-// public function store(Request $request)
-// {
-//     $validatedData = $request->validate([
-//         'name' => 'required|max:255',
-//         'description' => 'required|max:2000',
-//         'address' => 'required|max:255',
-//         'phone' => 'required|max:20',
-//         'opening_hours' => 'required|max:255',
-//     ]);
-
-//     $bar = Bar::create($validatedData);
-
-//     return redirect()->route('bar.index')
-//         ->with('success', 'Bar agregado correctamente');
-// }
 
 
 /*------------------Delete--------------------------------*/
