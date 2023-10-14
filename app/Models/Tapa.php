@@ -14,11 +14,30 @@ class Tapa extends Model
 
     //Relación muchos a muchos (Modelo con que se relaciona::class, 'nombre de la tabla intermedia', 'Llave foránea de la tabla en la que estamos ubicados', 'Llave foránea de la tabla a la que queremos acceder')
        
-    public function bars()
+//     public function bars()
+// {
+//     return $this->belongsToMany(Bar::class, 'bar_tapa', 'tapa_id', 'bar_id');
+// }
+public function bars()
 {
-    return $this->belongsToMany(Bar::class, 'bar_tapa', 'tapa_id', 'bar_id');
+    return $this->belongsToMany(Bar::class, 'bar_tapa', 'tapa_id', 'bar_id')->withTimestamps()->withPivot('id');
 }
+
+
 
     
 }
+// class Tapa extends Model
+// {
+//     use HasFactory;
+
+//     protected $fillable = ['name', 'img', 'description', 'price'];
+
+//     public function bars()
+//     {
+//         return $this->belongsToMany(Bar::class)
+//             ->withPivot('name', 'img') // Incluir 'nombre' y 'img' desde la tabla intermedia
+//             ->withTimestamps();
+//     }
+// }
 

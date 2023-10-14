@@ -16,24 +16,7 @@
                 <div class="card-body">
 
                     <form method="POST" action="{{route('bar_tapa.store')}}">
-                        @csrf
-                       
-                        <div class="form-group">
-                            <label for="bars">Bar</label>
-                            <select class="form-control select2" name="bars[]" id="bars" required>
-                                <option value="" disabled selected>Selecciona un bar</option>
-                                @foreach($bars as $id => $bar)
-                                    <option value="{{ $id }}">{{ $bar }}</option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('bars'))
-                            <span class="text-danger">
-                                <strong>{{ $errors->first('bars') }}</strong>
-                            </span>
-                            @endif
-                        </div>
-                        
-                        
+                        @csrf        
                         <div class="form-group">
                             <label for="tapas">Tapas</label>
                             <select class="form-control select2" name="tapas[]" id="tapas"  required>
@@ -49,23 +32,24 @@
                             @endif
                         </div>
 
-                        {{-- <div class="form-group">
-                            <label for="tapas">Tapas</label>
-                            <select class="form-control select2" name="tapas[]" id="tapas" multiple required>
-                                @foreach($tapas as $id => $tapa)
-                                <option value="{{ $id }}">{{ $tapa }}</option>
+                        <div class="form-group">
+                            <label for="bars">Bar</label>
+                            <select class="form-control select2" name="bars[]" id="bars" required>
+                                <option value="" disabled selected>Selecciona un bar</option>
+                                @foreach($bars as $id => $bar)
+                                    <option value="{{ $id }}">{{ $bar }}</option>
                                 @endforeach
                             </select>
-                            @if ($errors->has('tapas'))
+                            @if ($errors->has('bars'))
                             <span class="text-danger">
-                                <strong>{{ $errors->first('tapas') }}</strong>
+                                <strong>{{ $errors->first('bars') }}</strong>
                             </span>
                             @endif
-                        </div> --}}
-                       
+                        </div>
+                                             
                         <div class="row d-print-none mt-2">
                             <div class="col-12 text-right">
-                                <a class="btn btn-danger" href="{{route('bar_tapa')}}">
+                                <a class="btn btn-danger" href="{{route('bar_tapa.index')}}">
                                     <i class="fa fa-fw fa-lg fa-arrow-left"></i>
                                     Regresar
                                 </a>

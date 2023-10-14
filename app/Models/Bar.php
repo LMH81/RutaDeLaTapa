@@ -19,6 +19,12 @@ class Bar extends Model
          return $this->belongsToMany(Tapa::class, 'bar_tapa', 'bar_id', 'tapa_id')->withTimestamps();           
     }
 
+    // public function tapas()
+    // {
+    //     return $this->belongsToMany(Tapa::class)->withPivot('name','address')->withTimestamps();
+    // }
+
+
     
 
 

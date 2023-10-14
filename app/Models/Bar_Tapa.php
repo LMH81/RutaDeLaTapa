@@ -17,15 +17,14 @@ class Bar_Tapa extends Model
 
     public function tapas()
     {
-        //return $this->belongsToMany(Tapa::class);
         return $this->belongsToMany(Tapa::class, 'bar_tapa', 'bar_id', 'tapa_id');
     }
+    
 
     public function bars()
     {
-        //return $this->belongsToMany(Bar::class);
-
         return $this->belongsToMany(Bar::class, 'bar_tapa', 'tapa_id', 'bar_id');
     }
+    
 }
 

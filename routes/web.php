@@ -60,8 +60,29 @@ Route::group(['middleware' => 'auth'], function () {
 
     // /*-------------------------Rutas BarTapaController--------------------------*/
 
-     
-    Route::resource('bar_tapa', BarTapaController::class); 
+   
+
+    // Ruta para mostrar una lista de bares asociados a tapas
+    Route::get('/bar_tapa', [BarTapaController::class, 'index'])->name('bar_tapa.index');
+    
+    // Ruta para mostrar el formulario de creación de una relación entre bar y tapa
+    Route::get('/bar_tapa/create', [BarTapaController::class, 'create'])->name('bar_tapa.create');
+    
+    // Ruta para almacenar la relación entre bar y tapa en la base de datos
+    Route::post('/bar_tapa', [BarTapaController::class, 'store'])->name('bar_tapa.store');
+    
+    // Ruta para mostrar los detalles de una relación específica entre bar y tapa
+    Route::get('/bar_tapa/{id}', [BarTapaController::class, 'show'])->name('bar_tapa.show');
+    
+    // Ruta para mostrar el formulario de edición de una relación entre bar y tapa
+    Route::get('/bar_tapa/{id}/edit', [BarTapaController::class, 'edit'])->name('bar_tapa.edit');
+    
+    // Ruta para actualizar una relación entre bar y tapa en la base de datos
+    Route::put('/bar_tapa/{id}', [BarTapaController::class, 'update'])->name('bar_tapa.update');
+    
+    // Ruta para eliminar una relación entre bar y tapa
+    Route::delete('/bar_tapa/{id}', [BarTapaController::class, 'destroy'])->name('bar_tapa.destroy');
+    
            
     
 
@@ -79,15 +100,9 @@ Route::group(['middleware' => 'auth'], function () {
        
         $bars = App\Models\Bar::paginate(10);
         return view('bar.index', compact('bars'));
-    })->name('bars');
+    })->name('bars');  
 
-    Route::get('bar_tapa', function () {
-        $bar_tapas = App\Models\Bar_Tapa::paginate(10);
-        return view('bar_tapa.index',compact('bar_tapas') );
-    })->name('bar_tapa');
-
-    Route::get('vote-tapa', function () {
-       
+    Route::get('vote-tapa', function () {       
         return view('vote_tapa.index');
     })->name('vote-tapa');
 

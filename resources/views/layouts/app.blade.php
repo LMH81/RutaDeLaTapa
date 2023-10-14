@@ -66,7 +66,7 @@
                         </li> 
                         
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('bar_tapa') }}">{{ __('Bar_Tapa') }}</a>
+                            <a class="nav-link" href="{{ route('bar_tapa.index') }}">{{ __('Bar_Tapa') }}</a>
 
                         </li>
                     @endrole
