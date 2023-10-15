@@ -39,8 +39,8 @@ Route::group(['middleware' => 'auth'], function () {
     
 
     /*---------------------Rutas TapaController-------------------------------------*/
-    Route::resource('tapa', TapaController::class);
     Route::get('/tapa/chartbar', [App\Http\Controllers\ChartController::class, 'chartbar'])->name('tapa.chart'); ;   
+    Route::resource('tapa', TapaController::class);
     Route::get('/tapa/pdf', [App\Http\Controllers\TapaController::class, 'pdf'])->name('tapa.pdf'); 
     
    
@@ -92,13 +92,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('tapa', function () {
         //Gate::authorize('tapa');
-        $tapas = App\Models\Tapa::paginate(10);
+        $tapas = App\Models\Tapa::paginate(5);
         return view('tapa.index', compact('tapas'));
     })->name('tapa');
 
     Route::get('bars', function () {
        
-        $bars = App\Models\Bar::paginate(10);
+        $bars = App\Models\Bar::paginate(5);
         return view('bar.index', compact('bars'));
     })->name('bars');  
 
@@ -109,3 +109,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

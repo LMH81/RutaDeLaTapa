@@ -15,7 +15,7 @@ class BarTapaController extends Controller
    
 public function index()
 { 
-    $bar_tapas = Tapa::whereHas('bars')->with(['bars'])->get();
+    $bar_tapas = Tapa::whereHas('bars')->with(['bars'])->paginate(4);
     $grouped_tapas = [];
     
     foreach ($bar_tapas as $tapa) {
@@ -25,10 +25,13 @@ public function index()
         }
     }
     
-    return view('bar_tapa.index', compact('grouped_tapas'));
+    return view('bar_tapa.index', compact('bar_tapas', 'grouped_tapas'));
+
     
 
 }
+
+
 /*------------------Crear--------------------------------*/
 
 public function create()

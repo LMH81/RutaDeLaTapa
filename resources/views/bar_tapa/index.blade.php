@@ -56,6 +56,10 @@
                             @endif
                         </tbody>
                     </table>
+                    <div class="pagination">
+                        {{ $bar_tapas->links() }}
+
+                    </div>
                 </div>
             </div>
         </div>
