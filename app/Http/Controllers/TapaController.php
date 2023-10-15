@@ -17,7 +17,7 @@ class TapaController extends Controller
 
     public function index()
 {
-    $tapas = Tapa::paginate(5);
+    $tapas = Tapa::paginate();
     return view('tapa.index', compact('tapas'))
         ->with('i', (request()->input('page', 1) - 1) * $tapas->perPage());
 }
@@ -45,7 +45,7 @@ public function pdf()
     {
         //
          $campos=[
-            'name'=> 'required|string|max:100',
+            'name'=> 'required|string|max:1000',
             'img'=>'required|max:10000|mimes:jpg,png,jpg',
             'description' => 'required|string|max:2000',
             'price' => 'required|numeric|between:0,99.99',

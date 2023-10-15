@@ -40,7 +40,7 @@
             {{-- <a href="{{ url('tapa/reportPDF') }}" class="btn btn-danger mt-2 mb-2">Reporte</a> --}}
             <tr>
                
-                <th scope="col">Tapa_id</th>
+                {{-- <th scope="col">Tapa_id</th> --}}
                 <th scope="col">Foto</th>
                 <th scope="col">Nombre </th>                
                 <th scope="col">Descripción</th>
@@ -56,12 +56,12 @@
                
                 <tr class="table-light" >
                   
-                    <td>{{$tapa->id}}</td>
+                    {{-- <td>{{$tapa->id}}</td> --}}
                     <td>
                        <img class="img-fluid img-thumbnail" src="{{ asset('storage'.'/'.$tapa->img)}}"  width="200px" alt=""> 
                         </td>
 
-                    <td>{{$tapa->name}}</td>
+                    <td><strong>{{$tapa->name}}</strong></td>
                     <td>{{$tapa->description}}</td>
                     <td>{{$tapa->price}} € </td>
                     <td>

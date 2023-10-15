@@ -31,18 +31,13 @@ Route::get('/cookies_required', function () {
 
 Auth::routes();
 
-Route::get('/home', function () {
-        return view('dashboard');
-    })->name('dashboard');
-
 Route::group(['middleware' => 'auth'], function () {
     
 
     /*---------------------Rutas TapaController-------------------------------------*/
     Route::get('/tapa/chartbar', [App\Http\Controllers\ChartController::class, 'chartbar'])->name('tapa.chart'); ;   
-    Route::resource('tapa', TapaController::class);
-    Route::get('/tapa/pdf', [App\Http\Controllers\TapaController::class, 'pdf'])->name('tapa.pdf'); 
-    
+    Route::get('/tapa/pdf', [App\Http\Controllers\TapaController::class, 'pdf'])->name('tapa.pdf');
+    Route::resource('tapa', TapaController::class);    
    
            
         
@@ -92,7 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('tapa', function () {
         //Gate::authorize('tapa');
-        $tapas = App\Models\Tapa::paginate(5);
+        $tapas = App\Models\Tapa::paginate(3);
         return view('tapa.index', compact('tapas'));
     })->name('tapa');
 
@@ -109,7 +104,3 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

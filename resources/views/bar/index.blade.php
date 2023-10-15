@@ -35,7 +35,7 @@
         <thead class="table-light">
             <caption>Lista de bares</caption>
             <tr>
-                <th scope="col">Bar_id</th>
+                {{-- <th scope="col">Bar_id</th> --}}
                 <th scope="col">Nombre</th>
                 <th scope="col">Descripción </th>                
                 <th scope="col">Dirección</th>
@@ -51,8 +51,8 @@
                
                
                 <tr class="table-light" >
-                    <td>{{$bar->id}}</td>
-                    <td>{{$bar->name}}</td>
+                    {{-- <td>{{$bar->id}}</td> --}}
+                    <td><strong>{{$bar->name}}</strong></td>
                     <td>{{$bar->description}}</td>
                     <td> {{$bar->address}}</td>
                     <td>{{$bar->phone}} </td>

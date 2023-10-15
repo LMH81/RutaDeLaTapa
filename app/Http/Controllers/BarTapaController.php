@@ -13,23 +13,41 @@ use App\Models\Bar_Tapa;
 class BarTapaController extends Controller
 {
    
+// public function index()
+// { 
+//     $bar_tapas = Tapa::whereHas('bars')->with(['bars'])->paginate(2);
+//     $grouped_tapas = [];
+    
+//     foreach ($bar_tapas as $tapa) {
+//         foreach ($tapa->bars as $bar) {
+//             // $pivot_id = $bar->pivot->id;
+//             $grouped_tapas[$bar->name][] = $tapa;
+//         }
+//     }
+    
+//     return view('bar_tapa.index', compact('bar_tapas', 'grouped_tapas'));
+
+    
+
+// }
 public function index()
 { 
-    $bar_tapas = Tapa::whereHas('bars')->with(['bars'])->paginate(4);
+    $bar_tapas = Tapa::whereHas('bars')->with(['bars'])->paginate(2);
     $grouped_tapas = [];
     
     foreach ($bar_tapas as $tapa) {
         foreach ($tapa->bars as $bar) {
-            $pivot_id = $bar->pivot->id;
-            $grouped_tapas[$bar->name][] = $tapa;
+            $bartapa_Id = $bar->pivot->id; // Obtén el bartapa_Id de la relación intermedia
+            $grouped_tapas[$bar->name][] = [
+                'tapa' => $tapa,
+                'bartapa_Id' => $bartapa_Id,
+            ];
         }
     }
     
-    return view('bar_tapa.index', compact('bar_tapas', 'grouped_tapas'));
-
-    
-
+    return view('bar_tapa.index', compact('grouped_tapas', 'bar_tapas'));
 }
+
 
 
 /*------------------Crear--------------------------------*/
