@@ -9,6 +9,7 @@ use App\Models\Bar;
 class Bar_Tapa extends Model
 {
     protected $table = 'bar_tapa';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'bar_id',

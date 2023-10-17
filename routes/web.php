@@ -102,5 +102,3 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('vote-tapa');
 
 });
-
-
