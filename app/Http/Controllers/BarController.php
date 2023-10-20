@@ -96,7 +96,7 @@ class BarController extends Controller
 
         Bar::where('id','=',$id)->update($validatedData);
         $bar=Bar::find($id);      
-        return redirect('bars')->with('mensaje','Tapa modificada');
+        return redirect('bars')->with('mensaje','bar modificado');
     }
 
      /*---------------Borrar------------------ */

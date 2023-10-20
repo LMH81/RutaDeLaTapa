@@ -6,24 +6,30 @@
 
 
 @section('content')
-    <section class="content container-fluid">
-        <div class="row">
-            <div class="col-md-12">
+    <section class="content container-fluid h-100">
+
+        <div class="row h-100 justify-content-center align-items-center"> 
+            <div class="col-md-5 mb-3">
+               <div class="d-flex justify-content-start align-items-center mt-2 ml-2">
+                   <a class="btn btn-primary" href="{{ route('bars') }}"> {{ __('Regresar') }}</a>
+               </div>
+           </div>
+       </div>
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-md-5">
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Detalle') }} Tapa </span>
+                            <strongs>{{ __('Detalle') }} Tapa </strong> 
                         </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('tapa') }}"> {{ __('Regresar') }}</a>
-                        </div>
+                        
                     </div>
                     
 
                     <div class="card-body">
                         
                         <div class="form-group">
-                            <strong>Bar_id:</strong>
+                            <strong>Tapa_id:</strong>
                             {{ $tapa->id }}
                         </div>
 
@@ -48,6 +54,7 @@
                         
                         
                     </div>
+                   
                 </div>
             </div>
         </div>

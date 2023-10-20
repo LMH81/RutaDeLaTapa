@@ -9,6 +9,7 @@ class Bar extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'description', 'address', 'phone', 'opening_hours'];
+    protected $perPage = 20;
 
 
     //Relación muchos a muchos
@@ -19,12 +20,6 @@ class Bar extends Model
     }
     
 
-    // public function tapas()
-    // {
-    //     return $this->belongsToMany(Tapa::class)->withPivot('name','address')->withTimestamps();
-    // }
-
-
     
 
 
@@ -32,11 +27,11 @@ class Bar extends Model
    public static function rules()
    {
        return [
-           'name' => 'required|string|max:100',
+           'name' => 'required|string|max:1000',
            'description' => 'required|string|max:2000',
-           'address' => 'required|string|max:100',
+           'address' => 'required|string|max:1000',
            'phone' => 'required|string|max:20',
-           'opening_hours' => 'required|string|max:100'
+           'opening_hours' => 'required|string|max:1000'
        ];
    }
 }

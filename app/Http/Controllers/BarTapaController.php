@@ -46,11 +46,11 @@ public function create()
 
 public function store(Request $request)
 {
-
    
     $rules = [
         'tapas' => 'required|array|min:1',
         'bars' => 'required|array|min:1'
+        
     ];
 
     $messages = [
@@ -90,6 +90,53 @@ public function store(Request $request)
     return redirect()->route('bar_tapa.index')->with('success', 'Relación asignada exitosamente.');
 }
 
+/*------------------------------------------*/
+
+public function edit($id)
+{
+    $barTapa = Bar_Tapa::find($id);
+    
+    if (!$barTapa) {
+        return redirect()->route('bar_tapa.index')->with('error', 'La relación no fue encontrada.');
+    }
+
+    $bars = Bar::pluck('name', 'id');
+    $tapas = Tapa::pluck('name', 'id');
+
+    return view('bar_tapa.edit', compact('barTapa', 'bars', 'tapas'));
+}
+
+    
+
+/*-----------------Update----------------------------------*/
+
+public function update(Request $request, $id)
+{
+    $rules = [
+        'tapa_id' => 'required|exists:tapas,id',
+        'bar_id' => 'required|exists:bars,id'
+    ];
+
+    $messages = [
+        'tapa_id.required' => 'Debe seleccionar una tapa',
+        'bar_id.required' => 'Debe seleccionar un bar'
+    ];
+
+    $this->validate($request, $rules, $messages);
+
+    $barTapa = Bar_Tapa::find($id);
+
+    if (!$barTapa) {
+        return redirect()->route('bar_tapa.index')->with('error', 'La relación no fue encontrada.');
+    }
+
+    // Actualiza la relación en la tabla pivote con los nuevos valores
+    $barTapa->tapa_id = $request->input('tapa_id');
+    $barTapa->bar_id = $request->input('bar_id');
+    $barTapa->save();
+
+    return redirect()->route('bar_tapa.index')->with('success', 'Relación modificada exitosamente.');
+}
 
 
 /*------------------Delete--------------------------------*/
@@ -118,18 +165,18 @@ public function destroy($id)
 public function show($id)
 {
     $barTapa = Bar_Tapa::find($id);
-    
-     
 
     if (!$barTapa) {
         return redirect()->route('bar_tapa.index')->with('error', 'La relación no fue encontrada.');
-    }   
-   
+    }
 
-    // Puedes incluir otros detalles de la relación 'Bar_Tapa' aquí, si es necesario
+    // Obtén los detalles de la tapa y el bar relacionados con este barTapa
+    $tapa = Tapa::find($barTapa->tapa_id);
+    $bar = Bar::find($barTapa->bar_id);
 
-    return view('bar_tapa.show', compact('barTapa'));
+    return view('bar_tapa.show', compact('barTapa', 'tapa', 'bar'));
 }
+
 
 
 

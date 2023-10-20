@@ -2,6 +2,8 @@
 
 @section('content')
 
+@role('admin') 
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -52,7 +54,11 @@
                                         <td><strong>{{ $bar }}</strong> <br></td>
                                         <td>
                                             @foreach ($tapas as $tapaItem)
-                                                {{-- Agregamos un formulario para eliminar la relación --}}
+                                            <form action="{{ route('bar_tapa.edit', $tapaItem['bartapa_Id']) }}" class="d-inline" method="get">
+                                                @csrf
+                                                <button type="submit" class="btn btn-success">Editar</button>
+                                                &nbsp;|&nbsp;
+                                            </form>
                                                 <form action="{{ route('bar_tapa.destroy', $tapaItem['bartapa_Id']) }}"
                                                     method="post" class="d-inline">
                                                     @csrf
@@ -82,3 +88,5 @@
         </div>
     </div>
 @endsection
+
+@endrole
