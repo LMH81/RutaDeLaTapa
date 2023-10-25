@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\Voto;
 
 class User extends Authenticatable
 {
@@ -54,5 +56,10 @@ class User extends Authenticatable
 
         return $this->belongsToMany('App\Models\Tapa');
 
+    }
+    //un usario puede votar varias veces
+    public function votos()
+    {
+        return $this->hasMany(Voto::class, 'user_id');
     }
 }

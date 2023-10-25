@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BarController;
 use App\Http\Controllers\BarTapaController;
 use App\Http\Controllers\CookiesController;
+use App\Http\Controllers\VotoController;
+
 
 
 
@@ -77,8 +79,21 @@ Route::group(['middleware' => 'auth'], function () {
     
     // Ruta para eliminar una relación entre bar y tapa
     Route::delete('/bar_tapa/{id}', [BarTapaController::class, 'destroy'])->name('bar_tapa.destroy');
+
+
+    /*-------------------------------VotoController-----------------------------------------------*/
+    Route::get('/voto', [VotoController::class,'index'])->name('voto.index');
     
-           
+    Route::post('/voto', [VotoController::class,'store'])->name('voto.store'); 
+   
+    Route::get('/voto/create/{id}', [VotoController::class,'create'])->name('voto.create');
+       
+    Route::get('/voto-exito', function () {
+        return view('voto.voto-exito');
+    })->name('voto-exito');
+    
+    
+    
     
 
    /*------------------------Rutas Autorizadas------------------------------*/ 
@@ -97,8 +112,8 @@ Route::group(['middleware' => 'auth'], function () {
         return view('bar.index', compact('bars'));
     })->name('bars');  
 
-    Route::get('vote-tapa', function () {       
-        return view('vote_tapa.index');
-    })->name('vote-tapa');
+    // Route::get('vote-tapa', function () {       
+    //     return view('vote_tapa.index');
+    // })->name('vote-tapa');
 
 });

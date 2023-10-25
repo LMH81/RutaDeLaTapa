@@ -72,7 +72,7 @@
                     @endrole
                     @unlessrole('admin')
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('vote-tapa') }}">{{ __('Votar') }}</a>
+                        <a class="nav-link" href="{{ route('voto.index') }}">{{ __('Votar') }}</a>
 
                     </li>
                     @endunless
