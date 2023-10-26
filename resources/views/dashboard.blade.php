@@ -1,34 +1,32 @@
-<!-- dashboard.blade.php -->
 @extends('layouts.app')
 
 @section('content')
 
+@if (session('status'))
+<div class="alert alert-success">
+    {{ session('status') }}
+</div>
+@endif
+
 @if (!request()->hasCookie('cookie_consent'))
 <div id="cookie-banner" class="cookie-banner" role="group" aria-label="Acciones">
-        
-    <p> Este sitio web utiliza cookies para mejorar su experiencia de usuario y analizar de forma anónima y estadística el uso que hace de la web. 
-        Para más información accede la <span><a href="https://www.exteriores.gob.es/es/Paginas/Cookies.aspx" target="_blank"> Política de Cookies.</a></span> <br>  
-        Al hacer clic en <b>ACEPTAR</b> usted acepta el uso de todas las cookies.</p><br>  <br>
-        
-        <a href="{{ url('/')}}" class="btn btn-success" id="accept-btn">Aceptar</a>
-
-         
-        <form action="{{ url('/del-cookie')}}" class= "d-inline" method="get">
-            @csrf
-            {{-- {{method_field('DELETE')}} --}}
-            <input class="btn btn-danger" type="submit" onclick= "return confirm('¿Estás seguro?')" value="Rechazar">
-        </form>              
+    <p>Este sitio web utiliza cookies para mejorar su experiencia de usuario y analizar de forma anónima y estadística el uso que hace de la web. Para más información acceda a la <a href="https://www.exteriores.gob.es/es/Paginas/Cookies.aspx" target="_blank">Política de Cookies</a>.<br><br>Al hacer clic en <b>ACEPTAR</b>, usted acepta el uso de todas las cookies.</p><br><br>
+    <a href="{{ url('/')}}" class="btn btn-success" id="accept-btn">Aceptar</a>
+    <form action="{{ url('/del-cookie')}}" class="d-inline" method="get">
+        @csrf
+        <input class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro?')" value="Rechazar">
+    </form>
 </div>
 @endif
 
 @unlessrole('admin')
 <div class="text-center mx-auto my-5">
-        <h1>Elije una tapa y vota</h1>
-        <p>Bienvenido a la ruta de la tapa</p>
+    <h1>Elije una tapa y vota</h1>
+    <p>Bienvenido a la ruta de la tapa</p>
 </div>
 @endunless
-@endsection
 
+@endsection
 
 @section('scripts')
 @if (!request()->hasCookie('cookie_consent'))

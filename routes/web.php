@@ -87,10 +87,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/voto', [VotoController::class,'store'])->name('voto.store'); 
    
     Route::get('/voto/create/{id}', [VotoController::class,'create'])->name('voto.create');
-       
-    Route::get('/voto-exito', function () {
-        return view('voto.voto-exito');
-    })->name('voto-exito');
+    Route::get('/voto/{id}/edit', [VotoController::class,'edit'])->name('voto.edit');
+    Route::put('/voto/{id}', [VotoController::class,'update'])->name('voto.update'); 
+    Route::get('/user-voto', [VotoController::class, 'getUserVotos'])->name('voto.user-voto');
+    Route::delete('/voto/{id}', [VotoController::class, 'destroy'])->name('voto.destroy');
+
+
     
     
     
