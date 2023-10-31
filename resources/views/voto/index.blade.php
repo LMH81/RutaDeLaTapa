@@ -31,17 +31,17 @@
                             <thead class="table-light">
                                 <caption>Lista de tapas asociadas a bares</caption>
                                 <tr>
-                                    <th scope="col">Foto</th>
-                                    <th scope="col">Tapa</th>
-                                    <th scope="col">Bar</th>
-                                    <th scope="col">Acciones</th>
+                                    <th scope="col" class="text-center">Foto</th>
+                                    <th scope="col" class="text-center">Tapa</th>
+                                    <th scope="col" class="text-center">Bar</th>
+                                    <th scope="col" class="text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
                                 @if (isset($grouped_tapas))
                                     @foreach ($grouped_tapas as $bar => $tapas)
                                         <tr class="table-light">
-                                            <td><img class="img-fluid img-thumbnail"
+                                            <td class="text-center"><img class="img-fluid img-thumbnail"
                                                     src="{{ asset('storage/' . $tapas[0]['tapa']->img) }}" width="200px"
                                                     alt="{{ $tapas[0]['tapa']->name }}"></td>
                                             <td class="text-center"><strong>{{ $tapas[0]['tapa']->name }}</strong></td>

@@ -31,8 +31,9 @@
                             <th class="text-center">Foto</th>
                             <th class="text-center">Tapa</th>
                             <th class="text-center">Bar</th>
-                            <th class="text-center">Puntuación</th>
                             <th class="text-center">Comentario</th>
+                            <th class="text-center">Puntuación</th>
+                            
                             <th class="text-center">Acciones</th> 
                         </tr>
                     </thead>
@@ -44,8 +45,11 @@
                                 </td>
                                 <td class="text-center">{{ $votoData['tapa'] }}</td>
                                 <td class="text-center">{{ $votoData['bar'] }}</td>
-                                <td class="text-center">{{ $votoData['voto']->rating }}</td>
                                 <td class="text-center">{{ $votoData['voto']->comment ?: 'N/A' }}</td>
+                                {{-- <td class="text-center">{{ $votoData['voto']->rating }} </td> --}}
+                                    <td class="text-center">
+                                        {{ $votoData['stars'] }}</td>
+                                
                                 <td class="text-center d-flex">
                                     <a href="{{ route('voto.edit', $votoData['voto']->id) }}" class="btn btn-success mr-2">Cambiar Voto</a>
                                     &nbsp;|&nbsp;

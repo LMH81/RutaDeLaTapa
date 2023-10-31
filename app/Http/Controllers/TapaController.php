@@ -15,12 +15,31 @@ class TapaController extends Controller
    
    /*---------------Muestra una lista paginada de bares----------------- */
 
-    public function index()
+//     public function index()
+// {
+//     $tapas = Tapa::paginate();
+//     return view('tapa.index', compact('tapas'))
+//         ->with('i', (request()->input('page', 1) - 1) * $tapas->perPage());
+// }
+
+public function index(Request $request)
 {
-    $tapas = Tapa::paginate();
-    return view('tapa.index', compact('tapas'))
+    $search = $request->input('search', ''); // Obtener el término de búsqueda
+
+    // Realizar la búsqueda si se ha proporcionado un término de búsqueda
+    if (!empty($search)) {
+        $tapas = Tapa::where('name', 'like', "$search%")
+        ->orWhere('description', 'like', "$search%")
+        ->paginate();
+    } else {
+        // Mostrar todas las tapas si no se ha proporcionado un término de búsqueda
+        $tapas = Tapa::paginate(3);
+    }
+
+    return view('tapa.index', compact('tapas', 'search'))
         ->with('i', (request()->input('page', 1) - 1) * $tapas->perPage());
 }
+
 
 /*-------------------PDF----------------------*/
 public function pdf()

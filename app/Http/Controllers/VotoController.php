@@ -23,13 +23,14 @@ class VotoController extends Controller
     
     foreach ($bar_tapas as $tapa) {
         foreach ($tapa->bars as $bar) {
-            $bartapa_Id = $bar->pivot->id; // Obtiene el bartapa_Id de la relación intermedia
+            $bartapa_Id = $bar->pivot->id; // Obtiene el bartapa_Id de la relación intermedia            
             $grouped_tapas[$bar->name][] = [
                 'tapa' => $tapa,
                 'bartapa_Id' => $bartapa_Id,
+                
             ];
         }
-         // dd($grouped_tapas);
+         
     }
     
     return view('voto.index', compact('grouped_tapas', 'bar_tapas'));
@@ -93,12 +94,15 @@ public function getUserVotos()
         $barTapa = Bar_Tapa::find($voto->bar_tapa_id);
         $tapa = Tapa::find($barTapa->tapa_id);
         $bar = Bar::find($barTapa->bar_id);
+        //Llama a la función convertToStars con la puntuación del voto
+        $stars = $this->convertToStars($voto->rating);
 
         return [
             'voto' => $voto,
             'tapa' => $tapa->name,
             'img' => $tapa->img,
             'bar' => $bar->name,
+            'stars' => $stars,
         ];
     });
 
@@ -154,6 +158,59 @@ public function destroy($id)
     // Redirige a la vista de votos del usuario con un mensaje de éxito
     return redirect()->route('voto.user-voto')->with('success', 'El voto se eliminó con éxito.');
 }
+
+/*-------------------------------Votos Totales-----------------------------------------------------*/
+
+public function totalVotos()
+{
+    // Obtén todas las relaciones "bar_tapa" con las relaciones "votos" cargadas
+    $barTapas = Bar_Tapa::with('votos', 'bars', 'tapas')->paginate(9);
+
+    $barTapaWithTotalVotos = [];
+
+    foreach ($barTapas as $barTapa) {
+        $totalVotos = $barTapa->votos->sum('rating');
+        // Cargamos desde los modelos Tapa y Bar directamente
+        $tapa = Tapa::find($barTapa->tapa_id);
+        $bar = Bar::find($barTapa->bar_id);
+
+        // Convierte la puntuación en estrellas utilizando la función convertToStars
+        $stars = $this->convertToStars($totalVotos);
+
+        $barTapaWithTotalVotos[] = [
+            'voto' => $barTapa->votos,
+            'tapa' => $tapa ? $tapa->name : 'No asignado',
+            'img' => $tapa ? $tapa->img : 'No asignado',
+            'bar' => $bar ? $bar->name : 'No asignado',
+            'totalVotos' => $totalVotos,
+            'stars' => $stars, // Agregamos la puntuación en estrellas
+        ];
+    }
+
+    // Ordenamos de más a menos votos
+    usort($barTapaWithTotalVotos, function($a, $b) {
+        return $b['totalVotos'] - $a['totalVotos'];
+    });
+    
+
+    return view('voto.totalVotos', compact('barTapaWithTotalVotos', 'barTapas'));
+}
+
+
+private function convertToStars($rating)
+{
+    $stars = '';
+    for ($i = 1; $i <= 5; $i++) {
+        if ($i <= $rating) {
+            $stars .= '★'; // ★ representa una estrella
+        } else {
+            $stars .= '☆'; // ☆ representa una estrella vacía
+        }
+    }
+    return $stars;
+}
+
+
 
 
 

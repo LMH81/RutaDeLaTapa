@@ -17,27 +17,9 @@
     </script>
     @endif
 
-    <form action="{{ route('tapa.index') }}" method="GET" class="form-inline mt-3 mb-3">
-        <div class="d-flex justify-content-between w-100">
-            <div class="form-group flex-fill ml-2" style="margin-right: 10px;">
-                <input type="text" name="search" class="form-control" placeholder="Buscar tapas" value="{{ $search }}" id="searchInput">
-            </div>
-            <button type="submit" class="btn btn-primary" id="searchButton">Buscar</button>
-        </div>
-    </form>
-
-    @if (empty($search))
-        <a href="{{ url('tapa/create') }}" class="btn btn-primary">Registrar nueva tapa</a>&nbsp;&nbsp;
-        <a href="{{ url('tapa/pdf') }}" class="btn btn-success float-right">PDF</a>&nbsp;&nbsp;
-        <a href="{{ url('tapa/chartbar') }}" class="btn btn-warning float-right">Gráfica</a><br><br>
-    @endif
-
-    @if (!empty($search))
-        <a href="{{ url('tapa') }}" class="btn btn-primary">Regresar</a><br><br>
-    @endif
-
-    <!-- Formulario de búsqueda -->
-
+    <a href="{{ url('tapa/create') }}" class="btn btn-primary">Registrar nueva tapa</a>&nbsp;&nbsp;
+    <a href="{{ url('tapa/pdf') }}" class="btn btn-success float-right">PDF</a>&nbsp;&nbsp;
+    <a href="{{ url('tapa/chartbar') }}" class="btn btn-warning float-right">Gráfica</a><br /><br />
     <div class="table-responsive">
         <table class="table table-striped table-hover table-borderless table-secondary align-middle">
             <thead class="table-light">
@@ -59,11 +41,11 @@
                     </td>
                     <td><strong>{{ $tapa->name }}</strong></td>
                     <td>{{ $tapa->description }}</td>
-                    <td>{{ $tapa->price }} €</td>
+                    <td>{{ $tapa->price }} € </td>
                     <td>
                         <a href="{{ url('/tapa/' . $tapa->id . '/edit') }}" class="btn btn-success">Editar</a> |
-                        <button class="btn btn-danger" onclick="confirmDelete('{{ url('/tapa/' . $tapa->id) }}')">Borrar</button>
-                        | <form action="{{ url('/tapa/' . $tapa->id) }}" class="d-inline" method="get">
+                        <button class="btn btn-danger" onclick="confirmDelete('{{ url('/tapa/' . $tapa->id) }}')">Borrar
+                        </button> | <form action="{{ url('/tapa/' . $tapa->id) }}" class="d-inline" method="get">
                             @csrf
                             <input class="btn btn-warning" type="submit" value="Mostrar">
                         </form>
@@ -79,8 +61,11 @@
         </div>
     </div>
 </div>
+<script>
+    function confirmDelete(url) {
+        if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
+            window.location.href = url;
+        }
+    }
+</script>
 @endsection
-
-@push('scripts')
-<script src="{{ asset('js/search.js') }}"></script>
-@endpush

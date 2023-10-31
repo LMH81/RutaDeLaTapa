@@ -55,13 +55,13 @@
                     <ul class="navbar-nav me-auto">
                     @role('admin')                    
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('tapa') }}">{{ __('Tapas') }}</a>
+                                <a class="nav-link" href="{{ route('tapa.index') }}">{{ __('Tapas') }}</a>
                             </li>
                         
                        
                       
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('bars') }}">{{ __('Bares') }}</a>
+                            <a class="nav-link" href="{{ route('bar.index') }}">{{ __('Bares') }}</a>
 
                         </li> 
                         
@@ -73,7 +73,11 @@
                     @unlessrole('admin')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('voto.index') }}">{{ __('Votar') }}</a>
-
+                       
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('voto.totalVotos') }}">{{ __('Recuento') }}</a>
+                       
                     </li>
                     @endunless
 

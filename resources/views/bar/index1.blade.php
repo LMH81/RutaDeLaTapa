@@ -16,26 +16,9 @@
                 }
             </script>
         @endif
-        <form action="{{ route('bar.index') }}" method="GET" class="form-inline mt-3 mb-3">
-            <div class="d-flex justify-content-between w-100">
-                <div class="form-group flex-fill ml-2" style="margin-right: 10px;">
-                    <input type="text" name="search" class="form-control" placeholder="Buscar bares" value="{{ $search }}" id="searchInput">
-                </div>
-                <button type="submit" class="btn btn-primary" id="searchButton">Buscar</button>
-            </div>
-        </form>
-    
-        @if (empty($search))
-            <a href="{{ url('bar/create') }}" class="btn btn-primary">Registrar nuevo bar</a>&nbsp;&nbsp;
-            <a href="{{ url('bar/pdf') }}" class="btn btn-success float-right">PDF</a>&nbsp;&nbsp;
-           <br><br>
-        @endif
-    
-        @if (!empty($search))
-            <a href="{{ route('bar.index') }}" class="btn btn-primary">Regresar</a><br><br>
-        @endif
 
-        
+        <a href="{{ url('bar/create') }}" class="btn btn-primary">Registrar nuevo bar</a>&nbsp;&nbsp;
+        <a href="{{ url('bar/pdf') }}" class="btn btn-success float-right">PDF</a><br /><br />
         <div class="table-responsive">
             <table class="table table-striped table-hover table-borderless table-secondary align-middle">
                 <thead class="table-light">

@@ -7,23 +7,38 @@ use PDF;
 
 class BarController extends Controller
 {
+    
+     /*---------------Obtiene una colección de modelos de la tabla bars y los pagina para mostrarlos en la vista bar.index------------------ */
     // public function index()
     // {
-    //     $datos['bars'] = Bar::paginate(5);
-    //     return view('bar.index', $datos);
-    // }
-
-     /*---------------Obtiene una colección de modelos de la tabla bars y los pagina para mostrarlos en la vista bar.index------------------ */
-    public function index()
-    {
-        //
+    //     //
           
-        $bars = Bar::paginate();
+    //     $bars = Bar::paginate();
 
-        return view('bar.index', compact('bars'))
-            ->with('i', (request()->input('page', 1) - 1) * $bars->perPage());
+    //     return view('bar.index', compact('bars'))
+    //         ->with('i', (request()->input('page', 1) - 1) * $bars->perPage());
     
+    // }
+    public function index(Request $request)
+    {
+        $search = $request->input('search', ''); // Obtener el término de búsqueda
+    
+        // Realizar la búsqueda si se ha proporcionado un término de búsqueda
+        if (!empty($search)) {
+            $bars = Bar::where('name', 'like', "$search%")
+                ->orWhere('description', 'like', "$search%")
+                ->orWhere('address', 'like', "$search%")
+                ->paginate(); 
+        } else {
+            // Mostrar todos los bares si no se ha proporcionado un término de búsqueda
+            $bars = Bar::paginate(5); // Muestra 5 elementos por página
+        }
+    
+        return view('bar.index', compact('bars', 'search'))
+            ->with('i', (request()->input('page', 1) - 1) * $bars->perPage());
     }
+    
+
 
     
 /*-------------------PDF----------------------*/

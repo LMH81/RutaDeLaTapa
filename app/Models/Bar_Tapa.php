@@ -31,7 +31,13 @@ class Bar_Tapa extends Model
     //un voto se refiere a una tapa_bar especifica
     public function votos()
     {
-        return $this->hasMany(Voto::class, 'bar_tapa_id');
+        return $this->hasMany(Voto::class, 'bar_tapa_id', 'id');
+    }
+
+    // Método para calcular el total de votos
+    public function totalVotos()
+    {
+        return $this->votos->sum('rating');
     }
     
 }
