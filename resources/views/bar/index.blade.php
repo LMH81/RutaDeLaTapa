@@ -14,28 +14,33 @@
                 function cerrarAlerta() {
                     document.getElementById("alerta").style.display = "none";
                 }
+
+                function clearSearchInput() {
+                    document.getElementById("searchInput").value = '';
+                }
             </script>
         @endif
-        <form action="{{ route('bar.index') }}" method="GET" class="form-inline mt-3 mb-3">
+        <form action="{{ route('bar.index') }}" method="GET" class="form-inline mt-3 mb-3" onsubmit="clearSearchInput()">
             <div class="d-flex justify-content-between w-100">
                 <div class="form-group flex-fill ml-2" style="margin-right: 10px;">
-                    <input type="text" name="search" class="form-control" placeholder="Buscar bares" value="{{ $search }}" id="searchInput">
+                    <input type="text" name="search" class="form-control" placeholder="Buscar bares"
+                        value="{{ $search }}" id="searchInput">
                 </div>
-                <button type="submit" class="btn btn-primary" id="searchButton">Buscar</button>
+                <button type="submit" class="btn" style="background-color: var(--bs-blue); color: white;" id="searchButton">Buscar</button>
             </div>
         </form>
-    
+
         @if (empty($search))
-            <a href="{{ url('bar/create') }}" class="btn btn-primary">Registrar nuevo bar</a>&nbsp;&nbsp;
+            <a href="{{ url('bars/create') }}" class="btn" style="background-color: var(--bs-blue); color: white;">Registrar nuevo bar</a>&nbsp;&nbsp;
             <a href="{{ url('bar/pdf') }}" class="btn btn-success float-right">PDF</a>&nbsp;&nbsp;
-           <br><br>
-        @endif
-    
-        @if (!empty($search))
-            <a href="{{ route('bar.index') }}" class="btn btn-primary">Regresar</a><br><br>
+            <br><br>
         @endif
 
-        
+        @if (!empty($search))
+            <a href="{{ route('bar.index') }}" class="btn" style="background-color: var(--bs-blue); color: white;">Regresar</a><br><br>
+        @endif
+
+
         <div class="table-responsive">
             <table class="table table-striped table-hover table-borderless table-secondary align-middle">
                 <thead class="table-light">
@@ -61,16 +66,17 @@
                                 @if (Auth::check())
                                     <div class="btn-group" role="group" aria-label="Acciones">
                                         <a href="{{ url('/bars/' . $bar->id . '/edit') }}"
-                                            class="btn btn-success">Editar</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                            class="btn btn-success">Editar</a> &nbsp;|&nbsp;
                                         <button class="btn btn-danger"
-                                            onclick="confirmDelete('{{ url('/bars/' . $bar->id) }}')">Borrar
-                                        </button> | <form action="{{ url('/bars/' . $bar->id) }}" class="d-inline"
-                                            method="get">
+                                            onclick="confirmDelete('{{ url('/bars/' . $bar->id) }}')">Borrar</button>
+                                        &nbsp;|&nbsp;
+                                        <form action="{{ url('/bars/' . $bar->id) }}" method="get" class="d-inline">
                                             @csrf
-                                            <input class="btn btn-warning" type="submit" value="Mostrar">
+                                            <button class="btn btn-warning" type="submit">Mostrar</button>
                                         </form>
                                     </div>
                                 @endif
+
                             </td>
                         </tr>
                     @endforeach

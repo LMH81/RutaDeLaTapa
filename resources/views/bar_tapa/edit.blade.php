@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" style="margin-top: 20px;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -12,7 +12,7 @@
                         @method('PUT')
 
                         <div class="form-group">
-                            <label for="tapas">Tapas</label>
+                            <label for="tapas"><strong>Tapas</strong></label>
                             <select class="form-control select2" name="tapa_id" id="tapas" required>
                                 <option value="" disabled>Selecciona una tapa</option>
                                 @foreach($tapas as $id => $tapa)
@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="bars">Bar</label>
+                            <label for="bars"><strong>Bar</strong></label>
                             <select class="form-control select2" name="bar_id" id="bars" required>
                                 <option value="" disabled>Selecciona un bar</option>
                                 @foreach($bars as $id => $bar)

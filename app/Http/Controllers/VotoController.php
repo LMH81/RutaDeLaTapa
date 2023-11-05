@@ -164,7 +164,7 @@ public function destroy($id)
 public function totalVotos()
 {
     // Obtén todas las relaciones "bar_tapa" con las relaciones "votos" cargadas
-    $barTapas = Bar_Tapa::with('votos', 'bars', 'tapas')->paginate(9);
+    $barTapas = Bar_Tapa::with('votos', 'bars', 'tapas')->paginate(8);
 
     $barTapaWithTotalVotos = [];
 

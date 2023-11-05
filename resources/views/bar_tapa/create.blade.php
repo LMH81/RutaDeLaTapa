@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" style="margin-top: 20px;">
     <div class="row justify-content-center">
         <div class="col-sm-8">
-            <h1 class="m-0">Asigna Tapa</h1>
+            <h2 class="m-0">Asigna Tapa</h2>
         </div>
     </div>
 </div>
@@ -18,7 +18,7 @@
                     <form method="POST" action="{{route('bar_tapa.store')}}">
                         @csrf        
                         <div class="form-group">
-                            <label for="tapas">Tapas</label>
+                            <label for="tapas"><strong>Tapas</strong></label>
                             <select class="form-control select2" name="tapas[]" id="tapas"  required>
                                 <option value="" disabled selected>Selecciona una tapa</option>
                                 @foreach($tapas as $id => $tapa)
@@ -33,7 +33,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="bars">Bar</label>
+                            <label for="bars"><strong>Bar</strong></label>
                             <select class="form-control select2" name="bars[]" id="bars" required>
                                 <option value="" disabled selected>Selecciona un bar</option>
                                 @foreach($bars as $id => $bar)
@@ -49,7 +49,7 @@
                                              
                         <div class="row d-print-none mt-2">
                             <div class="col-12 text-right">
-                                <a class="btn btn-danger" href="{{route('bar_tapa.index')}}">
+                                <a class="btn btn-primary" href="{{route('bar_tapa.index')}}">
                                     <i class="fa fa-fw fa-lg fa-arrow-left"></i>
                                     Regresar
                                 </a>

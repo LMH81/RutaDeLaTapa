@@ -23,7 +23,12 @@ use App\Http\Controllers\VotoController;
 |
 */
 
-Route::get('/', [CookiesController::class, 'setCookie'])->name('setCookie');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('welcome');
+
+Route::get('/', [CookiesController::class, 'index'])->name('cookies.dashboard');
+Route::get('/setCookie', [CookiesController::class, 'setCookie'])->name('setCookie');
 Route::get('/get-cookie',[CookiesController::class,'getCookie']);
 Route::get('/del-cookie',[CookiesController::class,'delCookie']);
 Route::get('/cookies_required', function () {
@@ -65,6 +70,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Ruta para mostrar una lista de bares asociados a tapas
     Route::get('/bar_tapa', [BarTapaController::class, 'index'])->name('bar_tapa.index');
+    //Ruta para el metodo search
+    Route::get('/bar_tapa/search', [BarTapaController::class, 'search'])->name('bar_tapa.search');
+
     
     // Ruta para mostrar el formulario de creación de una relación entre bar y tapa
     Route::get('/bar_tapa/create', [BarTapaController::class, 'create'])->name('bar_tapa.create');
@@ -83,6 +91,9 @@ Route::group(['middleware' => 'auth'], function () {
     
     // Ruta para eliminar una relación entre bar y tapa
     Route::delete('/bar_tapa/{id}', [BarTapaController::class, 'destroy'])->name('bar_tapa.destroy');
+    
+   
+
 
 
     /*-------------------------------VotoController-----------------------------------------------*/
@@ -106,24 +117,6 @@ Route::group(['middleware' => 'auth'], function () {
     
     
 
-   /*------------------------Rutas Autorizadas------------------------------*/ 
-
-    
-
-    // Route::get('tapa', function () {
-    //     //Gate::authorize('tapa');
-    //     $tapas = App\Models\Tapa::paginate(3);
-    //     return view('tapa.index', compact('tapas'));
-    // })->name('tapa');
-
-    // Route::get('bars', function () {
-       
-    //     $bars = App\Models\Bar::paginate(5);
-    //     return view('bar.index', compact('bars'));
-    // })->name('bars');  
-
-    // Route::get('vote-tapa', function () {       
-    //     return view('vote_tapa.index');
-    // })->name('vote-tapa');
+   
 
 });

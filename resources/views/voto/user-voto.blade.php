@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h2>Tus votos</h2>
-        @if($votosWithNames->isEmpty())
+    <div class="container" style="margin-top: 20px;">
+        <h3>Tus votos</h3>
+        @if ($votosWithNames->isEmpty())
             <p>No has realizado ningún voto aún.</p>
         @else
             @if (session('success'))
@@ -33,27 +33,30 @@
                             <th class="text-center">Bar</th>
                             <th class="text-center">Comentario</th>
                             <th class="text-center">Puntuación</th>
-                            
-                            <th class="text-center">Acciones</th> 
+
+                            <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
                         @foreach ($votosWithNames as $votoData)
                             <tr class="table-light">
                                 <td class="text-center">
-                                    <img src="{{ asset('storage/' . $votoData['img']) }}" alt="{{ $votoData['tapa'] }}" class="img-fluid img-thumbnail" style="max-width: 100px; border: 1px solid #ddd;">
+                                    <img src="{{ asset('storage/' . $votoData['img']) }}" alt="{{ $votoData['tapa'] }}"
+                                        class="img-fluid img-thumbnail" style="max-width: 100px; border: 1px solid #ddd;">
                                 </td>
                                 <td class="text-center">{{ $votoData['tapa'] }}</td>
                                 <td class="text-center">{{ $votoData['bar'] }}</td>
                                 <td class="text-center">{{ $votoData['voto']->comment ?: 'N/A' }}</td>
                                 {{-- <td class="text-center">{{ $votoData['voto']->rating }} </td> --}}
-                                    <td class="text-center">
-                                        {{ $votoData['stars'] }}</td>
-                                
+                                <td class="text-center">
+                                    {{ $votoData['stars'] }}</td>
+
                                 <td class="text-center d-flex">
-                                    <a href="{{ route('voto.edit', $votoData['voto']->id) }}" class="btn btn-success mr-2">Cambiar Voto</a>
+                                    <a href="{{ route('voto.edit', $votoData['voto']->id) }}"
+                                        class="btn btn-success mr-2">Cambiar Voto</a>
                                     &nbsp;|&nbsp;
-                                    <form action="{{ route('voto.destroy', $votoData['voto']->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este voto?');">
+                                    <form action="{{ route('voto.destroy', $votoData['voto']->id) }}" method="POST"
+                                        onsubmit="return confirm('¿Estás seguro de que deseas eliminar este voto?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Borrar</button>
@@ -64,7 +67,8 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content">
-                    <a href="{{ route('voto.index') }}" class="btn btn-primary mb-3 mt-3">Regresar</a>&nbsp;&nbsp;
+                    <a href="{{ route('voto.index') }}" class="btn mt-3"
+                        style="background-color: var(--bs-blue);color: white;"><i class="fa fa-fw fa-lg fa-arrow-left"></i>Regresar</a>&nbsp;&nbsp;
                 </div>
             </div>
         @endif

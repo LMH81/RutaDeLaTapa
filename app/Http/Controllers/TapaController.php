@@ -28,8 +28,9 @@ public function index(Request $request)
 
     // Realizar la búsqueda si se ha proporcionado un término de búsqueda
     if (!empty($search)) {
-        $tapas = Tapa::where('name', 'like', "$search%")
-        ->orWhere('description', 'like', "$search%")
+        $tapas = Tapa::where('name', 'like', "%$search%")
+        ->orWhere('description', 'like', "%$search%")
+        ->orWhere('price', 'like', "%$search%")
         ->paginate();
     } else {
         // Mostrar todas las tapas si no se ha proporcionado un término de búsqueda

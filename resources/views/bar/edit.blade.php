@@ -1,14 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+    <div class="container" style="margin-top: 20px;">
 
-<form action="{{url('/bars/'.$bar->id)}}" method="post" enctype="multipart/form-data">
-    @csrf
-    {{method_field('PATCH')}}
+        <form action="{{ url('/bars/' . $bar->id) }}" method="post" enctype="multipart/form-data">
+            @csrf
+            {{ method_field('PATCH') }}
 
-    @include('bar.form',['modo'=>'Editar'])
+            @include('bar.form', ['modo' => 'Editar'])
+            <a href="{{ url('bars/') }}" class="btn btn-primary"><i class="fa fa-fw fa-lg fa-arrow-left"></i>Regresar</a>
 
-</form>
-</div>
-@endsection@
+            <button class="btn btn-success" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i> Editar bar</button>
+
+
+        </form>
+    </div>
+@endsection

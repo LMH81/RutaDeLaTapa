@@ -3,7 +3,7 @@
 @section('content')
     @unlessrole('admin')
 
-        <div class="container">
+        <div class="container" style="margin-top: 20px;">
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     @if (session('success'))
@@ -23,7 +23,8 @@
                             </button>
                         </div>
                     @endif
-                <a href="{{ route('voto.user-voto') }}" class="btn btn-primary mb-3 mt-3">Tus Votos</a>
+                    <a href="{{ route('voto.user-voto') }}" class="btn mb-3 mt-3"
+                        style="background-color: var(--bs-blue);color: white;">Tus Votos</a>
 
                     <div class="table-responsive">
                         <table

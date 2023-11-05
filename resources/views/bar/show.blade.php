@@ -5,14 +5,8 @@
 @endsection
 
 @section('content')
-    <section class="content container-fluid h-100 ">
-        <div class="row h-100 justify-content-center align-items-center"> 
-             <div class="col-md-5 mb-3">
-                <div class="d-flex justify-content-start align-items-center mt-2 ml-2">
-                    <a class="btn btn-primary" href="{{ route('bars') }}"> {{ __('Regresar') }}</a>
-                </div>
-            </div>
-        </div>
+    <section class="content container-fluid h-100 " style="margin-top: 20px;">
+        
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-md-5">
                 <div class="card">
@@ -55,6 +49,13 @@
                 </div>
             </div>
             
+        </div>
+        <div class="row h-100 justify-content-center align-items-center"> 
+             <div class="col-md-5 mb-3">
+                <div class="d-flex justify-content-start align-items-center mt-2 ml-2">
+                    <a class="btn btn-primary" href="{{ route('bar.index') }}"><i class="fa fa-fw fa-lg fa-arrow-left"></i> {{ __('Regresar') }}</a>
+                </div>
+            </div>
         </div>
     </section>
 @endsection

@@ -11,7 +11,7 @@
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-md-5 mb-3">
                 <div class="d-flex justify-content-start align-items-center mt-2 ml-2">
-                    <a class="btn btn-primary" href="{{ route('tapa') }}"> {{ __('Regresar') }}</a>
+                    <a class="btn btn-primary" href="{{ route('tapa.index') }}"> {{ __('Regresar') }}</a>
                 </div>
             </div>
         </div>

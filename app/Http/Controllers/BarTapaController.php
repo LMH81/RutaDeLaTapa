@@ -17,6 +17,7 @@ public function index()
 { 
     $bar_tapas = Tapa::whereHas('bars')->with(['bars'])->paginate(2);
     $grouped_tapas = [];
+    $search = '';
     
     foreach ($bar_tapas as $tapa) {
         foreach ($tapa->bars as $bar) {
@@ -25,12 +26,34 @@ public function index()
                 'tapa' => $tapa,
                 'bartapa_Id' => $bartapa_Id,
             ];
-        }
-         // dd($grouped_tapas);
+        }         
     }
     
-    return view('bar_tapa.index', compact('grouped_tapas', 'bar_tapas'));
+    return view('bar_tapa.index', compact('grouped_tapas', 'bar_tapas', 'search'));
 }
+
+/*---------------------------------------Buscar/Search.................................. */
+public function search(Request $request)
+{
+    $search = $request->input('search', ''); // Obtener el término de búsqueda
+    // dd($search);
+    // Realizar la búsqueda si se ha proporcionado un término de búsqueda
+    if (!empty($search)) {
+        $bar_tapas = Tapa::where('name', 'LIKE', "%$search%")
+            // ->orWhere('description', 'LIKE', "%$search%")
+            ->whereHas('bars')
+            ->with(['bars'])
+            ->paginate(5);
+    } else {
+        // Mostrar todas las tapas si no se ha proporcionado un término de búsqueda
+        $bar_tapas = Tapa::whereHas('bars')->with(['bars'])->paginate(5);
+    }
+
+    return view('bar_tapa.index', compact('bar_tapas', 'search'))
+        ->with('i', (request()->input('page', 1) - 1) * $bar_tapas->perPage())
+        ->with('search', $search);
+}
+
 
 
 /*------------------Crear--------------------------------*/
