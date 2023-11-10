@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container" style="margin-top: 20px;">
-        <h4>Votos totales por Tapa y Bar</h4>
+        <h3>Ranking de Votos</h3>
         @if (count($barTapaWithTotalVotos) === 0)
             <p>No hay votos registrados aún.</p>
         @else
@@ -37,9 +37,15 @@
 
             </div>
             <div class="d-flex justify-content-between align-items-center">
-                <a href="{{ route('voto.index') }}" class="btn" style="background-color: var(--bs-blue); color: white;">
-                    <i class="fa fa-fw fa-lg fa-arrow-left"></i> Regresar
-                </a>
+                @if (auth()->check())
+                    <a href="{{ route('voto.index') }}" class="btn" style="background-color: var(--bs-blue); color: white;">
+                        <i class="fa fa-fw fa-lg fa-arrow-left"></i> Regresar
+                    </a>
+                @else
+                    <a href="{{ route('cookies.dashboard') }}" class="btn mb-3 shadow"
+                        style="background-color: #a5b6a5; color: white;"><i
+                            class="fa fa-fw fa-lg fa-arrow-left"></i>Dashboard</a>
+                @endif
 
                 <div>
                     {{ $barTapas->links() }}

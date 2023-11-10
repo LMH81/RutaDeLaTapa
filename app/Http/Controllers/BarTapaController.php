@@ -32,6 +32,25 @@ public function index()
     return view('bar_tapa.index', compact('grouped_tapas', 'bar_tapas', 'search'));
 }
 
+public function indexDashboard()
+{ 
+    $bar_tapas = Tapa::whereHas('bars')->with(['bars'])->paginate(2);
+    $grouped_tapas = [];
+    $search = '';
+    
+    foreach ($bar_tapas as $tapa) {
+        foreach ($tapa->bars as $bar) {
+            $bartapa_Id = $bar->pivot->id; // Obtiene el bartapa_Id de la relación intermedia
+            $grouped_tapas[$bar->name][] = [
+                'tapa' => $tapa,
+                'bartapa_Id' => $bartapa_Id,
+            ];
+        }         
+    }
+    
+    return view('bar_tapa.dashboard', compact('grouped_tapas', 'bar_tapas', 'search'));
+}
+
 /*---------------------------------------Buscar/Search.................................. */
 public function search(Request $request)
 {

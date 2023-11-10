@@ -56,7 +56,9 @@
         </div>
     </div>
 
-    {{-- <input class="btn btn-success" type="submit"  value="{{$modo}} bar" >     --}}
+    <a href="{{ url('bars/') }}" class="btn" style="background-color: var(--bs-blue);color:white;"><i
+            class="fa fa-fw fa-lg fa-arrow-left"></i>Regresar</a>
+    <input class="btn btn-success" type="submit" value="{{ $modo }} bar">
 
 
 

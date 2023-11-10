@@ -43,7 +43,7 @@
 
                         <div class="row d-print-none mt-2">
                             <div class="col-12 text-right">
-                                <a class="btn btn-primary" href="{{ route('bar_tapa.index') }}">
+                                <a class="btn" style="background-color: var(--bs-blue);color:white;" href="{{ route('bar_tapa.index') }}">
                                     <i class="fa fa-fw fa-lg fa-arrow-left"></i> Regresar
                                 </a>
                                 <button class="btn btn-success" type="submit">

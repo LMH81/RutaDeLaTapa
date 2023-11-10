@@ -44,11 +44,16 @@
                         </div>
                     </form> --}}
                     @if (empty($search))
-                        <a href="{{ route('bar_tapa.create') }}" class="btn mb-3 mt-3" style="background-color: var(--bs-blue); color: white;">Asigna Tapa</a>
+                        <a href="{{ route('bar_tapa.dashboard') }}" class="btn mb-3 mt-3 shadow"
+                            style="background-color: #a5b6a5; color: white;"><i
+                                class="fa fa-fw fa-lg fa-arrow-left"></i>Dashboard</a>&nbsp;&nbsp;
+                        <a href="{{ route('bar_tapa.create') }}" class="btn mb-3 mt-3"
+                            style="background-color: var(--bs-blue); color: white;">Asigna Tapa</a>
                     @endif
 
                     @if (!empty($search))
-                        <a href="{{ route('bar_tapa.index') }}" class="btn mb-3 mt-3" style="background-color: var(--bs-blue); color: white;">Regresar</a><br><br>
+                        <a href="{{ route('bar_tapa.index') }}" class="btn mb-3 mt-3"
+                            style="background-color: var(--bs-blue); color: white;">Regresar</a><br><br>
                     @endif
                     <div class="table-responsive">
                         <table

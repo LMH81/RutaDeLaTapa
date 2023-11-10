@@ -12,6 +12,7 @@ use App\Http\Controllers\VotoController;
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,16 +24,12 @@ use App\Http\Controllers\VotoController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('welcome');
-
-Route::get('/', [CookiesController::class, 'index'])->name('cookies.dashboard');
+Route::get('/', [CookiesController::class, 'totalVotos'])->name('cookies.dashboard');
 Route::get('/setCookie', [CookiesController::class, 'setCookie'])->name('setCookie');
 Route::get('/get-cookie',[CookiesController::class,'getCookie']);
 Route::get('/del-cookie',[CookiesController::class,'delCookie']);
 Route::get('/cookies_required', function () {
-    return view('cookies_required');
+    return view('cookies.cookies_required');
 })->name('cookies_required');
 
 
@@ -64,12 +61,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/bars/{id}', [BarController::class, 'show'])->name('bar.show');
     Route::delete('/bars/{id}', [BarController::class, 'destroy'])->name('bar.delete');
 
-    // /*-------------------------Rutas BarTapaController--------------------------*/
-
-   
-
+     /*-------------------------Rutas BarTapaController--------------------------*/
+    
+    
     // Ruta para mostrar una lista de bares asociados a tapas
     Route::get('/bar_tapa', [BarTapaController::class, 'index'])->name('bar_tapa.index');
+    // Tablón de entrada
+    Route::get('/bar_tapa/indexDashboard', [BarTapaController::class, 'indexDashboard'])->name('bar_tapa.dashboard');    
     //Ruta para el metodo search
     Route::get('/bar_tapa/search', [BarTapaController::class, 'search'])->name('bar_tapa.search');
 

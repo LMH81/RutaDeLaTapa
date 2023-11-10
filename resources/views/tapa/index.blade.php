@@ -29,10 +29,12 @@
         </form>
 
         @if (empty($search))
+            <a href="{{ route('bar_tapa.dashboard') }}" class="btn mb-3 mt-3 shadow"
+                style="background-color: #a5b6a5; color: white;"><i class="fa fa-fw fa-lg fa-arrow-left"></i>Dashboard</a>&nbsp;&nbsp;
             <a href="{{ url('tapa/create') }}" class="btn"
                 style="background-color: var(--bs-blue); color: white;">Registrar nueva tapa</a>&nbsp;&nbsp;
             <a href="{{ url('tapa/pdf') }}" class="btn btn-success float-right">PDF</a>&nbsp;&nbsp;
-            <a href="{{ url('tapa/chartbar') }}" class="btn btn-warning float-right">Gráfica</a><br><br>
+            <a href="{{ url('tapa/chartbar') }}" class="btn btn-warning float-right">Gráfica</a><br>
         @endif
 
         @if (!empty($search))

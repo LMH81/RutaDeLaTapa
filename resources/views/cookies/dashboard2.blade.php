@@ -6,18 +6,16 @@
             {{ session('status') }}
         </div>
     @endif
-
+    {{-- 
     @guest
-        @if (!request()->hasCookie('cookie_consent') || request()->cookie('cookie_consent') !== 'aceptado')
+        @if (!request()->hasCookie('cookie_consent'))
             <div id="cookie-banner" class="cookie-banner" role="group" aria-label="Acciones">
                 <p>Este sitio web utiliza cookies para mejorar su experiencia de usuario y analizar de forma anónima y
                     estadística el uso que hace de la web. Para más información, acceda a la <a
-                        href="https://www.exteriores.gob.es/es/Paginas/Cookies.aspx" target="_blank"
-                        style="color: #0280ff; text-decoration: underline;">Política de
+                        href="https://www.exteriores.gob.es/es/Paginas/Cookies.aspx" target="_blank">Política de
                         Cookies</a>.<br><br>Al hacer clic en <b>ACEPTAR</b>, usted acepta el uso de todas las cookies.</p>
                 <br><br>
-                <a href="{{ route('setCookie') }}" class="btn btn-success" id="accept-btn">Aceptar</a>
-
+                <a href="#" class="btn btn-success" id="accept-btn">Aceptar</a>
                 <form action="{{ url('/del-cookie') }}" class="d-inline" method="get">
                     @csrf
                     <input class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro?')" value="Rechazar">
@@ -29,7 +27,8 @@
                 });
             </script>
         @endif
-    @endguest
+    @endguest --}}
+
 
     @unlessrole('admin')
         <!-- Tapas Section-->
@@ -46,50 +45,31 @@
                 <!-- Portfolio Grid Items-->
                 <div class="row justify-content-center">
 
-                    @foreach ($barTapaWithTotalVotos as $barTapa)
+                    @foreach ($grouped_tapas as $bar => $tapas)
                         <!-- Portfolio Item 1-->
                         <div class="col-md-6 col-lg-4 mb-5">
-
                             <div class="portfolio-item mx-auto" data-bs-toggle="modal"
-                                data-bs-target="#portfolioModal{{ $barTapa['bartapa_Id'] }}">
+                                data-bs-target="#portfolioModal{{ $tapas[0]['bartapa_Id'] }}">
                                 <div
                                     class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                     <div class="portfolio-item-caption-content text-center text-white"><i
                                             class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="{{ asset('storage/' . $barTapa['img']) }}"
+                                <img class="img-fluid" src="{{ asset('storage/' . $tapas[0]['tapa']->img) }}"
                                     style="max-width: 100%; height: auto; margin: 0 auto;" width="200px"
-                                    alt="{{ $barTapa['tapa'] }}" />
-
+                                    alt="{{ $tapas[0]['tapa']->name }}" />
+                                    
                             </div>
-                            <div class="table-container mt-3">
-                                <table>
-                                    <tr>
-                                        <th>Tapa:</th>
-                                        <td>{{ $barTapa['tapa'] }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Bar:</th>
-                                        <td>{{ $barTapa['bar'] }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Votos:</th>
-                                        <td>{{ $barTapa['stars'] }} ({{ $barTapa['totalVotos'] }} votos)</td>
-                                    </tr>
-
-                                </table>
-                            </div>
-
                         </div>
                         <!-- Portfolio Modal 1-->
-                        <div class="portfolio-modal modal fade" id="portfolioModal{{ $barTapa['bartapa_Id'] }}" tabindex="-1"
-                            aria-labelledby="portfolioModal{{ $barTapa['bartapa_Id'] }}" aria-hidden="true">
+                        <div class="portfolio-modal modal fade" id="portfolioModal{{ $tapas[0]['bartapa_Id'] }}" tabindex="-1"
+                            aria-labelledby="portfolioModal{{ $tapas[0]['bartapa_Id'] }}" aria-hidden="true">
                             <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header border-0"><button class="btn-close" type="button"
                                             data-bs-dismiss="modal" aria-label="Close"></button></div>
                                     <div class="modal-body text-center pb-5">
-                                        <div class "container">
+                                        <div class="container">
                                             <div class="row justify-content-center">
                                                 <div class="col-lg-8">
                                                     <!--  Modal - Title-->
@@ -103,28 +83,29 @@
                                                     </div>
                                                     <!--  Modal - Image-->
                                                     <img class="img-fluid rounded mb-5"
-                                                        src="{{ asset('storage/' . $barTapa['img']) }}"
-                                                        alt="{{ $barTapa['tapa'] }}" />
+                                                        src="{{ asset('storage/' . $tapas[0]['tapa']->img) }}"
+                                                        alt="{{ $tapas[0]['tapa']->name }}" />
                                                     <!--  Modal - Text-->
+
 
                                                     <div class="table-responsive" style="margin-left: 2px;">
                                                         <table class="table table-borderless">
                                                             <tbody>
                                                                 <tr>
                                                                     <th>Nombre tapa:</th>
-                                                                    <td>{{ $barTapa['tapa'] }}</td>
+                                                                    <td>{{ $tapas[0]['tapa']->name }}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Descripción:</th>
-                                                                    <td>{{ $barTapa['description'] }}</td>
+                                                                    <td>{{ $tapas[0]['tapa']->description }}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Nombre bar:</th>
-                                                                    <td>{{ $barTapa['bar'] }}</td>
+                                                                    <td>{{ $bar }}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Dirección:</th>
-                                                                    <td>{{ $barTapa['address'] }}</td>
+                                                                    <td>{{ $tapas[0]['address'] }}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -139,7 +120,7 @@
                                                             Cerrar ventana
                                                         </button>
 
-                                                        <a href="{{ route('voto.create', $barTapa['bartapa_Id']) }}"
+                                                        <a href="{{ route('voto.create', $tapas[0]['bartapa_Id']) }}"
                                                             class="btn btn-success mb-3 mt-3">Vota</a>
                                                     </div>
 
@@ -151,43 +132,44 @@
                             </div>
                         </div>
                     @endforeach
-                    <div class="col-md-6 col-lg-12"></div>
+
 
                 </div>
-                <div class="d-flex justify-content-center">
-                    {{ $barTapas->links() }}
-                </div>
+
         </section>
         <!-- About Section-->
-        <section class="page-section text-white mb-0" id="info" style="background-color: var(--bs-custom);">
+        <section class="page-section  text-white mb-0" id="info"
+            style="background-color: var(--bs-custom);>
             <div class="container">
-                <!-- About Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-white">Tapea y Gana</h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom divider-light">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
+            <!-- About Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-white">Tapea y Gana</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+
+            <!-- About Section Content-->
+            <div class="row">
+                <div class="col-lg-4 ms-auto">
+                    <p class="lead">La misión de Ruta de la Tapa es promover la cultura de las tapas en toda España,
+                        permitiendo a los usuarios descubrir nuevas tapas y compartir sus favoritas con la comunidad.
+                    </p>
+                    <p class="lead"> Nuestra visión es ser el principal recurso en línea para los amantes de las tapas,
+                        proporcionando una experiencia interactiva y enriquecedora que fomente el amor por la gastronomía.
+                    </p>
                 </div>
-                <!-- About Section Content-->
-                <div class="row">
-                    <div class="col-lg-4 ms-auto">
-                        <p class="lead">La misión de Ruta de la Tapa es promover la cultura de las tapas en toda España,
-                            permitiendo a los usuarios descubrir nuevas tapas y compartir sus favoritas con la comunidad.</p>
-                        <p class="lead">Nuestra visión es ser el principal recurso en línea para los amantes de las tapas,
-                            proporcionando una experiencia interactiva y enriquecedora que fomente el amor por la gastronomía.
-                        </p>
-                    </div>
-                    <div class="col-lg-4 me-auto">
-                        <p class="lead">A través de Tapea y Gana, puedes incentivar la participación al premiar a quienes
-                            votan en tu ruta. Tenemos un sistema opcional de premios directos para hacerlo aún más divertido.
-                            ¿Estás listo para descubrir nuevas tapas y unirte a la comunidad Ruta de la Tapa? Visita nuestra
-                            web o <a href="#contacto" style="color: #2C3E50; text-decoration: underline;">contacta con nosotros
-                            </a>
-                            hoy mismo y comienza tu viaje gastronómico.</p>
-                    </div>
+                <div class="col-lg-4 me-auto">
+                    <p class="lead">A través de Tapea y Gana, puedes incentivar la participación al premiar a quienes
+                        votan en tu ruta. Tenemos un sistema opcional de premios directos para hacerlo aún más divertido.
+                        ¿Estás listo para descubrir nuevas tapas y unirte a la comunidad Ruta de la Tapa? Visita nuestra
+                        web o <a href="#contacto"style="color:#2C3E50;text-decoration: underline;">contacta con nosotros </a>
+                        hoy mismo y comienza tu viaje gastronómico.</p>
                 </div>
-                </a>
+            </div>
+
+            </a>
             </div>
             </div>
         </section>

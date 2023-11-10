@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" style="margin-top: 20px;">
+    <div class="container" id="content" style="margin-top: 20px;">
 
         @if (session('success'))
             <div class="alert alert-success alert-dismissible">
@@ -26,7 +26,7 @@
             </div>
             <div class="col-md-8">
                 <h3>{{ $tapa->name }}</h3>
-                <p><strong>Bar: {{ $bar->name }}</strong></p>
+                <p><strong>Bar:{{ $bar->name }}</strong></p>
 
                 <form action="{{ route('voto.store', ['bar_tapa_id' => $barTapa->id]) }}" method="POST">
                     @csrf
@@ -37,8 +37,9 @@
                         @endfor
                     </select>
 
-                    <div class="form-group">
-                        <label for= "comment">Comentario (opcional):</label>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label for= "comment" style="margin-bottom: 10px;margin-top: 10px;"><strong>Comentario
+                                (opcional):</strong></label>
                         <textarea name="comment" id="comment" class="form-control" rows="4"></textarea>
                     </div>
                     <button type="submit" class="btn btn-success mb-3 mt-3" style="width: 100%;"><i

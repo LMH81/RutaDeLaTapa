@@ -53,12 +53,14 @@
                         <textarea name="comment" id="comment" class="form-control">{{ $voto->comment }}</textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-success mb-3 mt-3 btn-full-width"><i class="fa fa-fw fa-lg fa-check-circle"></i>Guardar cambios</button>
+                    <button type="submit" class="btn btn-success mb-3 mt-3 btn-full-width"><i
+                            class="fa fa-fw fa-lg fa-check-circle"></i>Guardar cambios</button>
 
                 </form>
 
                 <a href="{{ route('voto.user-voto') }}" class="btn"
-                    style="background-color: var(--bs-blue);color: white;display: block; margin-top: 10px;"><i class="fa fa-fw fa-lg fa-arrow-left"></i>Regresar</a>
+                    style="background-color: var(--bs-blue);color: white;display: block; margin-top: 10px;"><i
+                        class="fa fa-fw fa-lg fa-arrow-left"></i>Regresar</a>
 
 
 

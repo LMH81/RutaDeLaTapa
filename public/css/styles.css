@@ -20,6 +20,7 @@
   --bs-yellow: #ffc107;
   --bs-green: #198754;
   --bs-teal: #1abc9c;
+  --bs-custom: #a5b6a5;
   --bs-cyan: #0dcaf0;
   --bs-black: #000;
   --bs-white: #fff;
@@ -74,8 +75,8 @@
   --bs-border-radius-xl: 1rem;
   --bs-border-radius-2xl: 2rem;
   --bs-border-radius-pill: 50rem;
-  --bs-link-color: #1abc9c;
-  --bs-link-hover-color: #15967d;
+  --bs-link-color: #afd6af;
+  --bs-link-hover-color: #a5b6a5;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fff3cd;
 }
@@ -93,9 +94,7 @@
 }
 
 body {
-  margin: 0;
-  padding-bottom: 100px;
-  margin-bottom: 100px;
+  margin: 0;           
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
@@ -105,7 +104,12 @@ body {
   background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
+  padding-top: 56px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+} 
 
 hr {
   margin: 1rem 0;
@@ -493,6 +497,7 @@ progress {
 .lead {
   font-size: 1.25rem;
   font-weight: 300;
+  text-align: justify;
 }
 
 .display-1 {
@@ -3732,10 +3737,10 @@ textarea.form-control-lg {
 .navbar {
   --bs-navbar-padding-x: 0;
   --bs-navbar-padding-y: 0.5rem;
-  --bs-navbar-color: rgba(0, 0, 0, 0.55);
+  --bs-navbar-color: rgb(255, 255, 255);
   --bs-navbar-hover-color: rgba(0, 0, 0, 0.7);
   --bs-navbar-disabled-color: rgba(0, 0, 0, 0.3);
-  --bs-navbar-active-color: rgba(0, 0, 0, 0.9);
+  --bs-navbar-active-color: rgba(255, 255, 255, 0.9);
   --bs-navbar-brand-padding-y: 0.3125rem;
   --bs-navbar-brand-margin-end: 1rem;
   --bs-navbar-brand-font-size: 1.25rem;

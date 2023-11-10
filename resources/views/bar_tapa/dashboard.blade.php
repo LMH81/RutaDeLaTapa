@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @unlessrole('admin')
+    @role('admin')
 
         <div class="container" style="margin-top: 20px;">
             <div class="row justify-content-center">
@@ -22,40 +22,57 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <script>
+                            function cerrarAlerta() {
+                                document.getElementById("alerta").style.display = "none";
+                            }
+
+                            function clearSearchInput() {
+                                document.getElementById("searchInput").value = '';
+                            }
+                        </script>
                     @endif
-                    <a href="{{ route('cookies.dashboard') }}" class="btn mb-3 mt-3 shadow"
-                        style="background-color: #a5b6a5; color: white;"><i
-                            class="fa fa-fw fa-lg fa-arrow-left"></i>Dashboard</a>&nbsp;&nbsp;
-                    <a href="{{ route('voto.user-voto') }}" class="btn mb-3 mt-3"
-                        style="background-color: var(--bs-blue);color: white;">Tus Votos</a>
+
+
+                    @if (empty($search))
+                        <a href="{{ route('bar_tapa.index') }}" class="btn mb-3 mt-3"
+                            style="background-color: var(--bs-blue);color:white; ">Gestión
+                            de Bares y Tapas</a>
+                        <a href="{{ route('tapa.index') }}" class="btn mb-3 mt-3"
+                            style="background-color: var(--bs-green);color:white; ">Lista
+                            de Tapas</a>
+                        <a href="{{ route('bar.index') }}" class="btn mb-3 mt-3"
+                            style="background-color: var(--bs-warning); font-weight: bold; ">Bares
+                            Asociados</a>
+                    @endif
 
                     <div class="table-responsive">
                         <table
-                            class="table table-striped table-hover table-borderless table-secondary align-middle table-bordered">
+                            class="table table-striped 
+                table-hover table-borderless 
+                table-secondary 
+                align-middle">
                             <thead class="table-light">
                                 <caption>Lista de tapas asociadas a bares</caption>
                                 <tr>
-                                    <th scope="col" class="text-center">Foto</th>
-                                    <th scope="col" class="text-center">Tapa</th>
-                                    <th scope="col" class="text-center">Bar</th>
-                                    <th scope="col" class="text-center">Acciones</th>
+                                    {{-- <th scope="col">ID</th> --}}
+                                    <th scope="col">Foto</th>
+                                    <th scope="col">Tapa</th>
+                                    <th scope="col">Bar</th>
+                                    {{-- <th scope="col">Acciones</th> --}}
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
                                 @if (isset($grouped_tapas))
                                     @foreach ($grouped_tapas as $bar => $tapas)
                                         <tr class="table-light">
-                                            <td class="text-center"><img class="img-fluid img-thumbnail"
-                                                    src="{{ asset('storage/' . $tapas[0]['tapa']->img) }}" width="200px"
+                                            {{-- <td>{{ $tapa->id }} </td> --}}
+                                            <td><img class="img-fluid img-thumbnail"
+                                                    src="{{ asset('storage' . '/' . $tapas[0]['tapa']->img) }}" width="200px"
                                                     alt="{{ $tapas[0]['tapa']->name }}"></td>
-                                            <td class="text-center"><strong>{{ $tapas[0]['tapa']->name }}</strong></td>
-                                            <td class="text-center"><strong>{{ $bar }}</strong> <br></td>
-                                            <td class="text-center">
-                                                @foreach ($tapas as $tapaItem)
-                                                    <a href="{{ route('voto.create', $tapaItem['bartapa_Id']) }}"
-                                                        class="btn btn-success mb-3 mt-3">Vota</a>
-                                                @endforeach
-                                            </td>
+                                            <td><strong>{{ $tapas[0]['tapa']->name }}</strong></td>
+                                            <td><strong>{{ $bar }}</strong> <br></td>
+
                                         </tr>
                                     @endforeach
                                 @endif
@@ -70,4 +87,4 @@
         </div>
     @endsection
 
-@endunless
+@endrole

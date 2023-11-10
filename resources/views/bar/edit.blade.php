@@ -8,9 +8,7 @@
             {{ method_field('PATCH') }}
 
             @include('bar.form', ['modo' => 'Editar'])
-            <a href="{{ url('bars/') }}" class="btn btn-primary"><i class="fa fa-fw fa-lg fa-arrow-left"></i>Regresar</a>
 
-            <button class="btn btn-success" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i> Editar bar</button>
 
 
         </form>

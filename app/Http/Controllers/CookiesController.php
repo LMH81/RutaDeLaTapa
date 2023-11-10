@@ -8,35 +8,31 @@ use App\Models\Bar;
 use App\Models\Tapa;
 use App\Models\Voto;
 use App\Models\Bar_Tapa;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Cookie;
 
 
 class CookiesController extends Controller
 {
     //
 
-     /*------------Crear las cookies-----------------*/
-    
+     /*------------Crear las cookies-----------------*/ 
 
-
-    public function setCookie()
-    {
-        if (!request()->hasCookie('cookie_consent')) {
-            return response(view('dashboard'))->withCookie('cookie_consent', Str::uuid(), 1);
-        } else {
-            session(['cookie_consent' => true]);
-            return view('dashboard');
-        }
-    }   
-   
-    
+     public function setCookie()
+     {
+         if (!request()->hasCookie('cookie_consent')) {           
+             Cookie::queue('cookie_consent', 'aceptado', 1440);
+         } 
+         return redirect('/');
+     }
+      
+      
 
  /*------------Extraer las cookies-----------------*/
     public function getCookie (){
-        return request()->cookie('cookie_consent');
-    }
+        return request()->cookie('cookie_consent');    }
 
     /*------------Borrar cookies-----------------*/
-
 
 public function delCookie()
 {
@@ -65,5 +61,65 @@ public function index()
         
         return view('cookies.dashboard', compact('grouped_tapas', 'bar_tapas'));
     }
+
+
+public function totalVotos()
+{
+    // Obtén todas las relaciones "bar_tapa" con las relaciones "votos" cargadas
+    $barTapas = Bar_Tapa::with('votos', 'bars', 'tapas')
+        ->get()
+        ->sortByDesc(function ($barTapa) {
+            return $barTapa->votos->sum('rating');
+        });
+
+    // Pagina los resultados después de ordenarlos
+    $perPage = 6;
+    $currentPage = request()->input('page', 1);
+    $pagedData = array_slice($barTapas->all(), ($currentPage - 1) * $perPage, $perPage);
+    $barTapas = new LengthAwarePaginator($pagedData, count($barTapas), $perPage, $currentPage);
+
+    $barTapaWithTotalVotos = [];
+
+    foreach ($barTapas as $barTapa) {
+        $totalVotos = $barTapa->votos->sum('rating');
+        // Cargamos desde los modelos Tapa y Bar directamente
+        $tapa = Tapa::find($barTapa->tapa_id);
+        $bar = Bar::find($barTapa->bar_id);
+
+        // Convierte la puntuación en estrellas utilizando la función convertToStars
+        $stars = $this->convertToStars($totalVotos);
+
+        $barTapaWithTotalVotos[] = [
+                        'voto' => $barTapa->votos,
+                        'tapa' => $tapa ? $tapa->name : 'No asignado',
+                        'description' => $tapa ? $tapa->description : 'Sin descripción', 
+                        'img' => $tapa ? $tapa->img : 'No asignado',
+                        'bar' => $bar ? $bar->name : 'No asignado',
+                        'bartapa_Id' => $barTapa->id,
+                        'address' => $bar ? $bar->address : 'No asignado',
+                        'opening_hours' => $bar ? $bar->opening_hours : 'No asignado',
+                        'totalVotos' => $totalVotos,
+                        'stars' => $this->convertToStars($totalVotos), // Agregamos la puntuación en estrellas
+                    ];
+
+        
+    }
+
+    return view('cookies.dashboard', compact('barTapaWithTotalVotos', 'barTapas'));
+}
+
+private function convertToStars($rating)
+{
+    $stars = '';
+    for ($i = 1; $i <= 5; $i++) {
+        if ($i <= $rating) {
+            $stars .= '★'; // ★ representa una estrella
+        } else {
+            $stars .= '☆'; // ☆ representa una estrella vacía
+        }
+    }
+    return $stars;
+}
+
 
 }

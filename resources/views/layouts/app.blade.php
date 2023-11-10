@@ -28,28 +28,12 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
         type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
+
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+
+    {{-- <link href="css/stylesApp.css" rel="stylesheet" /> --}}
+
     <style>
-        body {
-            margin: 0;
-            /* padding-bottom: 100px;
-            margin-bottom: 100px; */
-            font-family: var(--bs-body-font-family);
-            font-size: var(--bs-body-font-size);
-            font-weight: var(--bs-body-font-weight);
-            line-height: var(--bs-body-line-height);
-            color: var(--bs-body-color);
-            text-align: var(--bs-body-text-align);
-            background-color: var(--bs-body-bg);
-            -webkit-text-size-adjust: 100%;
-            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-            padding-top: 56px;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-
-        }
-
         .bg-color {
             background-color: #a5b6a5;
         }
@@ -57,12 +41,15 @@
         .navbar-nav li a {
             color: #fff;
             font-weight: bold;
+            transition: color 0.3s;
         }
 
 
         .navbar-brand {
             font-weight: bold;
         }
+
+        .nav-link {}
 
         .footer {
 
@@ -87,31 +74,9 @@
             align-items: center;
         }
 
-        .btn-outline-dark {
-            --bs-btn-color: #212529;
-            --bs-btn-border-color: #212529;
-            --bs-btn-hover-color: #fff;
-            --bs-btn-hover-bg: #212529;
-            --bs-btn-hover-border-color: #212529;
-            --bs-btn-focus-shadow-rgb: 33, 37, 41;
-            --bs-btn-active-color: #fff;
-            --bs-btn-active-bg: #212529;
-            --bs-btn-active-border-color: #212529;
-            --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-            --bs-btn-disabled-color: #212529;
-            --bs-btn-disabled-bg: transparent;
-            --bs-btn-disabled-border-color: #212529;
-            --bs-gradient: none;
-        }
 
         .white-line {
             border-top: 1px solid #fff;
-        }
-
-        .content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
         }
     </style>
 
@@ -122,8 +87,9 @@
     <nav class="navbar navbar-expand-md navbar-light bg-color fixed-top shadow-sm">
 
         <div class="container">
-            <a class="navbar-brand bg-color1" id="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+            <a class="navbar-brand bg-color" id="navbar-brand"
+                href="{{ Auth::user() && Auth::user()->hasRole('admin') ? route('bar_tapa.dashboard') : url('/') }}">
+                {{ config('app.name', 'RutaDeLaTapa') }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -139,8 +105,6 @@
                             <a class="nav-link" href="{{ route('tapa.index') }}">{{ __('Tapas') }}</a>
                         </li>
 
-
-
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('bar.index') }}">{{ __('Bares') }}</a>
 
@@ -153,12 +117,21 @@
                     @endrole
                     @unlessrole('admin')
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('cookies.dashboard') }}#portfolio">{{ __('Tapas') }}</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('voto.index') }}">{{ __('Votar') }}</a>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('voto.totalVotos') }}">{{ __('Recuento') }}</a>
+                            <a class="nav-link" href="{{ route('cookies.dashboard') }}#info">{{ __('Tapea y Gana') }}</a>
+                        </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('voto.totalVotos') }}">{{ __('Ranking') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('cookies.dashboard') }}#contacto">{{ __('Contacto') }}</a>
                         </li>
                     @endunless
 
@@ -205,7 +178,14 @@
     </nav>
 
     @yield('content')
+
+    {{-- @if (request()->routeIs('cookies.dashboard'))
+        
+       
+    @endif --}}
 </body>
+
+
 <footer class="footer text-center ">
     <div class="container">
         <div class="row">
@@ -221,11 +201,13 @@
             <small>2023 &copy; Laura Martínez Hiraldo </small>
             <p>Vota tu tapa favorita</p>
         </div>
-        <a class="btn btn-outline-dark btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f fa-xs"></i></a>
-        <a class="btn btn-outline-dark btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter fa-xs"></i></a>
-        <a class="btn btn-outline-dark btn-social mx-1" href="#!"><i
+        <a class="btn btn-outline-dark btn-social mx-1" href="https://www.facebook.com"><i
+                class="fab fa-fw fa-facebook-f fa-xs"></i></a>
+        <a class="btn btn-outline-dark btn-social mx-1" href="https://www.twitter.com"><i
+                class="fab fa-fw fa-twitter fa-xs"></i></a>
+        <a class="btn btn-outline-dark btn-social mx-1" href="https://www.linkedin.com"><i
                 class="fab fa-fw fa-linkedin-in fa-xs"></i></a>
-        <a class="btn btn-outline-dark btn-social mx-1" href="#!"><i
+        <a class="btn btn-outline-dark btn-social mx-1" href="https://www.dribbble.com"><i
                 class="fab fa-fw fa-dribbble fa-xs"></i></a>
     </div>
 </footer>
