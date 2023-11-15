@@ -31,6 +31,7 @@ Route::get('/del-cookie',[CookiesController::class,'delCookie']);
 Route::get('/cookies_required', function () {
     return view('cookies.cookies_required');
 })->name('cookies_required');
+Route::get('/ruta', [CookiesController::class, 'ruta'])->name('cookies.ruta');
 
 
 Auth::routes();
@@ -52,7 +53,12 @@ Route::group(['middleware' => 'auth'], function () {
     /*---------------------Rutas BarController-------------------------------------*/ 
     Route::get('/bar/pdf', [App\Http\Controllers\BarController::class, 'pdf'])->name('bar.pdf'); 
     //Route::resource('bar', 'App\Http\Controllers\BarController');
-    // Route::get('/bars/{id}', 'BarController@show');   
+    // Route::get('/bars/{id}', 'BarController@show');     // En routes/web.php
+    //Route::get('/bars/{id}/show-map', [BarController::class, 'showMap'])->name('bar.showMap');
+   
+
+    Route::get('/bar/{barId}/coordinates', [BarController::class, 'getCoordinates']);
+    
     Route::get('/bars', [BarController::class, 'index'])->name('bar.index'); 
     Route::get('/bars/create', [BarController::class, 'create'])->name('bar.create');  
     Route::post('/bars', [BarController::class, 'store'])->name('bar.store');
@@ -70,7 +76,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/bar_tapa/indexDashboard', [BarTapaController::class, 'indexDashboard'])->name('bar_tapa.dashboard');    
     //Ruta para el metodo search
     Route::get('/bar_tapa/search', [BarTapaController::class, 'search'])->name('bar_tapa.search');
-
     
     // Ruta para mostrar el formulario de creación de una relación entre bar y tapa
     Route::get('/bar_tapa/create', [BarTapaController::class, 'create'])->name('bar_tapa.create');
@@ -89,6 +94,8 @@ Route::group(['middleware' => 'auth'], function () {
     
     // Ruta para eliminar una relación entre bar y tapa
     Route::delete('/bar_tapa/{id}', [BarTapaController::class, 'destroy'])->name('bar_tapa.destroy');
+    //Ruta para coordenadas
+    Route::get('/bar_tapa/{id}/coordinates', [BarTapaController::class, 'getCoordinates']);
     
    
 

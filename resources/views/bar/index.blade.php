@@ -2,6 +2,8 @@
 
 @section('content')
     <div class="container">
+
+
         <!-- Alerta mensaje -->
         @if (Session::has('mensaje'))
             <div id="alerta" class="alert alert-success alert-dismissible" role="alert">
@@ -37,7 +39,7 @@
                     class="fa fa-fw fa-lg fa-arrow-left"></i>Dashboard</a>&nbsp;&nbsp;
             <a href="{{ url('bars/create') }}" class="btn"
                 style="background-color: var(--bs-blue); color: white;">Registrar nuevo bar</a>&nbsp;&nbsp;
-            <a href="{{ url('bar/pdf') }}" class="btn btn-success float-right">PDF</a>&nbsp;&nbsp;
+            <a href="{{ url('bar/pdf') }}" class="btn btn-warning float-right">PDF</a>&nbsp;&nbsp;
             <br>
         @endif
 
@@ -58,6 +60,7 @@
                         <th scope="col">Teléfono</th>
                         <th scope="col">Horario</th>
                         <th scope="col">Acciones</th>
+                        <th scope="col">Localización</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -75,15 +78,29 @@
                                             class="btn btn-success">Editar</a> &nbsp;|&nbsp;
                                         <button class="btn btn-danger"
                                             onclick="confirmDelete('{{ url('/bars/' . $bar->id) }}')">Borrar</button>
-                                        &nbsp;|&nbsp;
+                                        {{-- &nbsp;|&nbsp;
                                         <form action="{{ url('/bars/' . $bar->id) }}" method="get" class="d-inline">
                                             @csrf
                                             <button class="btn btn-warning" type="submit">Mostrar</button>
-                                        </form>
+                                        </form> --}}
                                     </div>
                                 @endif
 
                             </td>
+                            <td style="text-align: center; vertical-align: middle;">
+                                <a href="{{ route('bar.show', $bar->id) }}" class="btn shadow"
+                                    style="background-color: var(--bs-blue); color: white; display: inline-block; line-height: 20px;"
+                                    title="Ver Mapa" onmouseover="this.style.backgroundColor='#f1458d'"
+                                    onmouseout="this.style.backgroundColor='var(--bs-blue)'"">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                </a>
+
+
+                            </td>
+
+
+
+
                         </tr>
                     @endforeach
                 </tbody>

@@ -136,11 +136,22 @@
                                                             data-bs-dismiss="modal">
 
                                                             <i class="fas fa-xmark fa-fw"></i>
-                                                            Cerrar ventana
+                                                            Cerrar
                                                         </button>
 
                                                         <a href="{{ route('voto.create', $barTapa['bartapa_Id']) }}"
                                                             class="btn btn-success mb-3 mt-3">Vota</a>
+
+
+
+                                                        {{-- <a href="{{ route('cookies.ruta', $tapaItem['bartapa_Id']) }}"
+                                                            class="btn shadow"
+                                                            style="background-color: var(--bs-blue); color: white; display: inline-block; line-height: 20px;"
+                                                            title="Ver Mapa" onmouseover="this.style.backgroundColor='#f1458d'"
+                                                            onmouseout="this.style.backgroundColor='var(--bs-blue)'"">
+                                                            <i class="fa fa-map-marker" aria-hidden="true"></i>Ubicación
+                                                        </a> --}}
+
                                                     </div>
 
                                                 </div>
@@ -182,7 +193,8 @@
                         <p class="lead">A través de Tapea y Gana, puedes incentivar la participación al premiar a quienes
                             votan en tu ruta. Tenemos un sistema opcional de premios directos para hacerlo aún más divertido.
                             ¿Estás listo para descubrir nuevas tapas y unirte a la comunidad Ruta de la Tapa? Visita nuestra
-                            web o <a href="#contacto" style="color: #2C3E50; text-decoration: underline;">contacta con nosotros
+                            web o <a href="#contacto" style="color: #2C3E50; text-decoration: underline;">contacta con
+                                nosotros
                             </a>
                             hoy mismo y comienza tu viaje gastronómico.</p>
                     </div>

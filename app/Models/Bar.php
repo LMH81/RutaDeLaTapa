@@ -17,11 +17,8 @@ class Bar extends Model
     public function tapas()
     {
         return $this->belongsToMany(Tapa::class, 'bar_tapa', 'bar_id', 'tapa_id')->withPivot('id')->withTimestamps();
-    }
-    
-
-    
-
+    }   
+   
 
    // Reglas de validación para el modelo Bar
    public static function rules()

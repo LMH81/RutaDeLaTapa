@@ -219,6 +219,29 @@ public function show($id)
     return view('bar_tapa.show', compact('barTapa', 'tapa', 'bar'));
 }
 
+/*-------------------Geolocalización------------------------------- */
+public function getCoordinates($id)
+{
+    $barTapa = Bar_Tapa::find($id);
+
+    if (!$barTapa) {
+        return response()->json(['error' => 'Bar_Tapa not found'], 404);
+    }
+
+    $bar = Bar::find($barTapa->bar_id);
+
+    if (!$bar) {
+        return response()->json(['error' => 'Bar not found'], 404);
+    }
+
+    $coordinates = [
+        'latitude' => $bar->latitude,
+        'longitude' => $bar->longitude,
+    ];
+
+    return response()->json($coordinates);
+}
+
 
 
 

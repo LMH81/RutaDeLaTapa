@@ -5,8 +5,8 @@
 
         <form action="{{ url('/bars') }}" method="post" enctype="multipart/form-data"><br>
             @csrf
-            @include('bar.form', ['modo' => 'Añadir'])
-            
+            @include('bar.form', ['modo' => 'Añadir'])<br>
+
 
         </form>
     </div>

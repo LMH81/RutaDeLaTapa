@@ -69,6 +69,7 @@
                                     <th scope="col">Tapa</th>
                                     <th scope="col">Bar</th>
                                     <th scope="col">Acciones</th>
+                                    <th scope="col">Localización</th>
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
@@ -96,14 +97,24 @@
                                                         <button type="submit" class="btn btn-danger"
                                                             onclick="return confirm('¿Estás seguro de eliminar este registro?')">Borrar</button>
                                                     </form>
-                                                    &nbsp;|&nbsp;
+                                                    {{-- &nbsp;|&nbsp;
 
                                                     <form action="{{ route('bar_tapa.show', $tapaItem['bartapa_Id']) }}"
                                                         class="d-inline" method="get">
                                                         @csrf
                                                         <input class="btn btn-warning" type="submit" value="Mostrar">
-                                                    </form>
+                                                    </form> --}}
                                                 @endforeach
+                                            </td>
+                                            <td style="text-align: center; vertical-align: middle;">
+                                                <a href="{{route('bar_tapa.show', $tapaItem['bartapa_Id']) }}" class="btn shadow"
+                                                    style="background-color: var(--bs-blue); color: white; display: inline-block; line-height: 20px;"
+                                                    title="Ver Mapa" onmouseover="this.style.backgroundColor='#f1458d'"
+                                                    onmouseout="this.style.backgroundColor='var(--bs-blue)'"">
+                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                </a>
+
+
                                             </td>
                                         </tr>
                                     @endforeach

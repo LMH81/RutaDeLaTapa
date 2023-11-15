@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Bar;
 use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Support\Facades\View;
 
 class BarController extends Controller
 {
@@ -126,5 +127,28 @@ class BarController extends Controller
                 ->with('error', 'No se encontró el bar que intenta eliminar');
         }
 }
+
+
+/*--------------------Geolocalización---------------------- */
+
+public function getCoordinates($barId)
+{
+        $bar = Bar::find($barId);
+    
+    if (!$bar) {
+        return response()->json(['error' => 'Bar not found'], 404);
+    }
+    
+    $coordinates = [
+        'latitude' => $bar->latitude,
+        'longitude' => $bar->longitude,
+    ];
+   
+    return response()->json($coordinates);
+}
+
+
+
+ 
 
 }

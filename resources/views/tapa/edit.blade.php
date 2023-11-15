@@ -7,7 +7,7 @@
             @csrf
             {{ method_field('PATCH') }}
 
-            @include('tapa.form', ['modo' => 'Editar'])
+            @include('tapa.form', ['modo' => 'Editar']) <br>
 
         </form>
     </div>
