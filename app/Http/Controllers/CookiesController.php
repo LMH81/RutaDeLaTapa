@@ -119,9 +119,8 @@ private function convertToStars($rating)
         }
     }
     return $stars;
+
 }
 
-/*-----------------------Ruta----------------- */
 
-public function ruta(){}
 }

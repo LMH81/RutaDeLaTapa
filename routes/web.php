@@ -8,6 +8,8 @@ use App\Http\Controllers\BarController;
 use App\Http\Controllers\BarTapaController;
 use App\Http\Controllers\CookiesController;
 use App\Http\Controllers\VotoController;
+use App\Http\Controllers\MapController;
+
 
 
 
@@ -24,6 +26,8 @@ use App\Http\Controllers\VotoController;
 |
 */
 
+
+/*----------------------CookiesController---------------------------------------------- */
 Route::get('/', [CookiesController::class, 'totalVotos'])->name('cookies.dashboard');
 Route::get('/setCookie', [CookiesController::class, 'setCookie'])->name('setCookie');
 Route::get('/get-cookie',[CookiesController::class,'getCookie']);
@@ -38,16 +42,21 @@ Auth::routes();
 
 Route::get('/voto/totalVotos', [VotoController::class, 'totalVotos'])->name('voto.totalVotos');
 
-Route::group(['middleware' => 'auth'], function () {
-    
+/*------------------------MapOntroller---------------------------------------------*/
+
+Route::get('/map/{id}/coordinates', [MapController::class, 'getCoordinates']);
+Route::get('/map/{id}', [MapController::class, 'showMap'])->name('map');
+
+/*----------------------Rutas con autorización------------------------------------------------------ */
+
+
+Route::group(['middleware' => 'auth'], function () {    
 
     /*---------------------Rutas TapaController-------------------------------------*/
-    Route::get('/tapa/chartbar', [App\Http\Controllers\ChartController::class, 'chartbar'])->name('tapa.chart'); ;   
+    Route::get('/tapa/chartbar', [App\Http\Controllers\ChartController::class, 'chartbar'])->name('tapa.chart'); 
     Route::get('/tapa/pdf', [App\Http\Controllers\TapaController::class, 'pdf'])->name('tapa.pdf');
     Route::resource('tapa', TapaController::class); 
-    Route::get('/tapa', [TapaController::class, 'index'])->name('tapa.index');   
-   
-           
+    Route::get('/tapa', [TapaController::class, 'index'])->name('tapa.index');         
         
 
     /*---------------------Rutas BarController-------------------------------------*/ 
@@ -114,14 +123,5 @@ Route::group(['middleware' => 'auth'], function () {
    // Route::get('/voto/totalVotos', [VotoController::class, 'totalVotos'])->name('voto.totalVotos');
     
 
-
-
-
-    
-    
-    
-    
-
-   
 
 });

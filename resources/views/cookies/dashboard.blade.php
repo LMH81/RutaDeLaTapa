@@ -142,15 +142,13 @@
                                                         <a href="{{ route('voto.create', $barTapa['bartapa_Id']) }}"
                                                             class="btn btn-success mb-3 mt-3">Vota</a>
 
-
-
-                                                        {{-- <a href="{{ route('cookies.ruta', $tapaItem['bartapa_Id']) }}"
-                                                            class="btn shadow"
-                                                            style="background-color: var(--bs-blue); color: white; display: inline-block; line-height: 20px;"
+                                                        <a href="{{ route('map', $barTapa['bartapa_Id']) }}"
+                                                            class="btn mb-3 mt-3 shadow"
+                                                            style="background-color: #a5b6a5; color: white; display: inline-block; line-height: 20px;height: 40px;"
                                                             title="Ver Mapa" onmouseover="this.style.backgroundColor='#f1458d'"
-                                                            onmouseout="this.style.backgroundColor='var(--bs-blue)'"">
-                                                            <i class="fa fa-map-marker" aria-hidden="true"></i>Ubicación
-                                                        </a> --}}
+                                                            onmouseout="this.style.backgroundColor='#a5b6a5'; return false;">
+                                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                        </a>
 
                                                     </div>
 
@@ -227,10 +225,10 @@
                         <form id="contactForm" data-sb-form-api-token="API_TOKEN">
                             <!-- Name input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="name" type="text" placeholder="Enter your name..."
-                                    data-sb-validations="required" />
+                                <input class="form-control" id="name" type="text"
+                                    placeholder="Introduzca su nombre..." data-sb-validations="required" />
                                 <label for="name">Nombre y Apellidos</label>
-                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.
+                                <div class="invalid-feedback" data-sb-feedback="name:required">Un nombre es obligatorio.
                                 </div>
                             </div>
                             <!-- Email address input-->
@@ -238,25 +236,24 @@
                                 <input class="form-control" id="email" type="email" placeholder="name@example.com"
                                     data-sb-validations="required,email" />
                                 <label for="email">Email</label>
-                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.
+                                <div class="invalid-feedback" data-sb-feedback="email:required">El email es obligatorio.
                                 </div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                <div class="invalid-feedback" data-sb-feedback="email:email">Email no válido.</div>
                             </div>
                             <!-- Phone number input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890"
+                                <input class="form-control" id="phone" type="tel" placeholder="(+34) 111222333"
                                     data-sb-validations="required" />
                                 <label for="phone">Télefono</label>
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is
-                                    required.</div>
+                                <div class="invalid-feedback" data-sb-feedback="phone:required">Un teléfono es obligatorio.
+                                </div>
                             </div>
                             <!-- Message input-->
                             <div class="form-floating mb-3">
                                 <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..."
                                     style="height: 10rem" data-sb-validations="required"></textarea>
                                 <label for="message">Mensaje</label>
-                                <div class="invalid-feedback" data-sb-feedback="message:required">A message is
-                                    required.</div>
+                                <div class="invalid-feedback" data-sb-feedback="message:required">Escriba un mensaje.</div>
                             </div>
                             <!-- Submit success message-->
                             <!---->

@@ -64,18 +64,54 @@
 
         const barId = document.querySelector('.col-md-5').dataset.barId;
 
-        // Obtener las coordenadas del bar desde el backend (supongamos que hay una ruta bar.coordinates)
+        // Obtener las coordenadas del bar desde el backend 
         fetch(`/bar/${barId}/coordinates`)
             .then(response => response.json())
             .then(data => {
                 let myMap = L.map('myMap').setView([data.latitude, data.longitude], 18);
                 L.tileLayer(titleProvider, {
                     maxZoom: 19,
-                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">RutaDeLaTapa</a>'
+                    attribution: 'Leaflet &copy; <a href="http://www.openstreetmap.org/copyright">RutaDeLaTapa</a>'
                 }).addTo(myMap);
 
-                // Agregar marcador en la ubicación del bar
-                L.marker([data.latitude, data.longitude]).addTo(myMap);
+                const marker = L.marker([data.latitude, data.longitude]).addTo(myMap);
+
+                const popupContent = `
+            <div>
+                <h5><strong>{{ $bar->name }}</strong></h5>
+                <p><strong>{{ $bar->address }}</strong></p>
+            </div>
+        `;
+
+                // Función para abrir y cerrar el popup al hacer clic en el marcador
+                function togglePopup() {
+                    if (marker.isPopupOpen()) {
+                        marker.closePopup();
+                    } else {
+                        marker.bindPopup(popupContent).openPopup();
+                    }
+                }
+
+                // Asociar evento de clic para abrir/cerrar el popup al hacer clic en el marcador
+                marker.on('click', togglePopup);
+                // Abre automáticamente el mensaje emergente al cargar el mapa
+                marker.bindPopup(popupContent).openPopup();
+
+                // Asociar evento de clic para abrir el popup al hacer clic en el mapa
+                myMap.on('click', function(e) {
+                    marker.bindPopup(popupContent).openPopup();
+                });
+
+                const accuracy = 10; // Define la precisión del círculo (en metros)
+                const circle = L.circle([data.latitude, data.longitude], {
+                    radius: accuracy
+                }).addTo(myMap);
+
+                // Ajustar el mapa al círculo si no se ha ampliado previamente
+                let zoomed = false;
+                if (!zoomed) {
+                    zoomed = myMap.fitBounds(circle.getBounds());
+                }
             })
             .catch(error => console.error('Error:', error));
     </script>

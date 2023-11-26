@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @role('admin')
+    {{-- @role('admin') --}}
 
         <div class="container" style="margin-top: 20px;">
             <div class="row justify-content-center">
@@ -87,4 +87,4 @@
         </div>
     @endsection
 
-@endrole
+{{-- @endrole --}}

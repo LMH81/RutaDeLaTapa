@@ -12,6 +12,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
     <!-- importar los estilos de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -21,14 +22,16 @@
 
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
         type="text/css" />
-    <!-- Core theme CSS (includes Bootstrap)-->
 
+    <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
     {{-- <link href="css/stylesApp.css" rel="stylesheet" /> --}}
@@ -161,7 +164,7 @@
                             </li>
                         @endif
                     @else
-                        <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
@@ -178,7 +181,20 @@
                                     @csrf
                                 </form>
                             </div>
+                        </li> --}}
+
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ route('logout') }}"
+                                role="button"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </li>
+
                     @endguest
                 </ul>
             </div>
@@ -187,39 +203,37 @@
 
     @yield('content')
 
-    {{-- @if (request()->routeIs('cookies.dashboard'))
-        
-       
-    @endif --}}
+
 
 </body>
 
+@section('footer')
+    <footer class="footer text-center ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 offset-lg-4 text-black" style="margin-top: 1rem;">
+                    <h4>RutaDeLaTapa</h4>
+                    <hr class="white-line" style="border: 2px solid #fff;">
 
-<footer class="footer text-center ">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 offset-lg-4 text-black" style="margin-top: 1rem;">
-                <h4>RutaDeLaTapa</h4>
-                <hr class="white-line" style="border: 2px solid #fff;">
-
+                </div>
             </div>
         </div>
-    </div>
-    <div class="copyright py-1 text-center text-black">
-        <div class="container">
-            <small>2023 &copy; Laura Martínez Hiraldo </small>
-            <p>Vota tu tapa favorita</p>
+        <div class="copyright py-1 text-center text-black">
+            <div class="container">
+                <small>2023 &copy; Laura Martínez Hiraldo </small>
+                <p>Vota tu tapa favorita</p>
+            </div>
+            <a class="btn btn-outline-dark btn-social mx-1" href="https://www.facebook.com"><i
+                    class="fab fa-fw fa-facebook-f fa-xs"></i></a>
+            <a class="btn btn-outline-dark btn-social mx-1" href="https://www.twitter.com"><i
+                    class="fab fa-fw fa-twitter fa-xs"></i></a>
+            <a class="btn btn-outline-dark btn-social mx-1" href="https://www.linkedin.com"><i
+                    class="fab fa-fw fa-linkedin-in fa-xs"></i></a>
+            <a class="btn btn-outline-dark btn-social mx-1" href="https://www.dribbble.com"><i
+                    class="fab fa-fw fa-dribbble fa-xs"></i></a>
         </div>
-        <a class="btn btn-outline-dark btn-social mx-1" href="https://www.facebook.com"><i
-                class="fab fa-fw fa-facebook-f fa-xs"></i></a>
-        <a class="btn btn-outline-dark btn-social mx-1" href="https://www.twitter.com"><i
-                class="fab fa-fw fa-twitter fa-xs"></i></a>
-        <a class="btn btn-outline-dark btn-social mx-1" href="https://www.linkedin.com"><i
-                class="fab fa-fw fa-linkedin-in fa-xs"></i></a>
-        <a class="btn btn-outline-dark btn-social mx-1" href="https://www.dribbble.com"><i
-                class="fab fa-fw fa-dribbble fa-xs"></i></a>
-    </div>
-</footer>
+    </footer>
+@show
 
 
 
