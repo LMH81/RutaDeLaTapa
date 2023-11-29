@@ -184,16 +184,33 @@
                         </li> --}}
 
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ route('logout') }}"
-                                role="button"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
-
+                            <a class="dropdown-item" href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                id="logout-link" style="display: none;">
+                                {{ __('Logout') }}
+                            </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
                         </li>
+
+
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                document.getElementById('navbarDropdown').addEventListener('click', function() {
+                                    var logoutLink = document.getElementById('logout-link');
+                                    logoutLink.style.display = logoutLink.style.display === 'none' ? 'block' : 'none';
+                                });
+                            });
+                        </script>
+
+
+
 
                     @endguest
                 </ul>

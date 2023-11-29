@@ -120,7 +120,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/voto/{id}', [VotoController::class,'update'])->name('voto.update'); 
     Route::get('/user-voto', [VotoController::class, 'getUserVotos'])->name('voto.user-voto');
     Route::delete('/voto/{id}', [VotoController::class, 'destroy'])->name('voto.destroy');
-   // Route::get('/voto/totalVotos', [VotoController::class, 'totalVotos'])->name('voto.totalVotos');
+   
     
 
 

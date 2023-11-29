@@ -196,51 +196,6 @@ public function totalVotos()
 
     return view('voto.totalVotos', compact('barTapaWithTotalVotos', 'barTapas'));
 }
-// public function totalVotos()
-// {
-//     // Obtén todas las relaciones "bar_tapa" con las relaciones "votos" cargadas
-//     $barTapas = Bar_Tapa::with('votos', 'bars', 'tapas')
-//         ->get()
-//         ->sortByDesc(function ($barTapa) {
-//             return $barTapa->votos->sum('rating');
-//         });
-
-//     // Pagina los resultados después de ordenarlos
-//     $perPage = 6;
-//     $currentPage = request()->input('page', 1);
-//     $pagedData = array_slice($barTapas->all(), ($currentPage - 1) * $perPage, $perPage);
-//     $barTapas = new LengthAwarePaginator($pagedData, count($barTapas), $perPage, $currentPage);
-
-//     $barTapaWithTotalVotos = [];
-
-//     foreach ($barTapas as $barTapa) {
-//         $totalVotos = $barTapa->votos->sum('rating');
-//         // Cargamos desde los modelos Tapa y Bar directamente
-//         $tapa = Tapa::find($barTapa->tapa_id);
-//         $bar = Bar::find($barTapa->bar_id);
-
-//         // Convierte la puntuación en estrellas utilizando la función convertToStars
-//         $stars = $this->convertToStars($totalVotos);
-
-//         $barTapaWithTotalVotos[] = [
-//                         'voto' => $barTapa->votos,
-//                         'tapa' => $tapa ? $tapa->name : 'No asignado',
-//                         'description' => $tapa ? $tapa->description : 'Sin descripción', 
-//                         'img' => $tapa ? $tapa->img : 'No asignado',
-//                         'bar' => $bar ? $bar->name : 'No asignado',
-//                         'bartapa_Id' => $barTapa->id,
-//                         'address' => $bar ? $bar->address : 'No asignado',
-//                         'opening_hours' => $bar ? $bar->opening_hours : 'No asignado',
-//                         'totalVotos' => $totalVotos,
-//                         'stars' => $this->convertToStars($totalVotos), // Agregamos la puntuación en estrellas
-//                     ];
-
-        
-//     }
-
-//     return view('voto.totalVotos', compact('barTapaWithTotalVotos', 'barTapas'));
-// }
-
 
 
 private function convertToStars($rating)

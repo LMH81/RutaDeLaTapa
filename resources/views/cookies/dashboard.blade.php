@@ -77,6 +77,53 @@
                                         <td>{{ $barTapa['stars'] }} ({{ $barTapa['totalVotos'] }} votos)</td>
                                     </tr>
 
+                                    <tr>
+                                        <th>Opiniones:</th>
+                                        <td>&nbsp;
+                                            <button class="btn show-opinions-btn mb-3 mt-2 shadow"
+                                                style="background-color:  #a5b6a5;color: white;"><i
+                                                    class="fas fa-eye"></i></button>
+
+
+
+                                            <div class="opinions-section" style="display: none;">
+
+                                                @if (isset($barTapa['comments']) && count($barTapa['comments']) > 0)
+                                                    <table class="table" style="border: 1px solid #dee2e6;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Comentarios</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($barTapa['comments'] as $comment)
+                                                                <tr>
+                                                                    <td>{{ $comment->comment }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                @else
+                                                    <table class="table" style="border: 1px solid #dee2e6;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Comentarios</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>No hay opiniones. ¡Sé el primero en
+                                                                    comentar!</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+
                                 </table>
                             </div>
 
@@ -306,6 +353,25 @@
             });
         </script>
     @endif
+    <!---script para mostrar contenido despues de hacer clic en el botón ver----------------->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+                    let showOpinionsButtons = document.querySelectorAll('.show-opinions-btn');
+                    showOpinionsButtons.forEach(function(button) {
+                            button.addEventListener('click', function() {
+                                    let opinionsSection = this.nextElementSibling;
+
+
+                                    if (opinionsSection.style.display === 'none' || opinionsSection.style
+                                        .display === '') {
+                                        opinionsSection.style.display = 'table-row';
+                                    } else {
+                                        opinionsSection.style.display = 'none';
+                                    });
+                            });
+                    });
+    </script>
+
     <style>
         .cookie-banner {
             position: fixed;

@@ -86,6 +86,11 @@ public function totalVotos()
         $tapa = Tapa::find($barTapa->tapa_id);
         $bar = Bar::find($barTapa->bar_id);
 
+        //Obtenemos los comentarios asociados a cada barTapa_Id específica
+        $comentarios = Voto::where('bar_tapa_id', $barTapa->id)
+            ->whereNotNull('comment')
+            ->get();
+
         // Convierte la puntuación en estrellas utilizando la función convertToStars
         $stars = $this->convertToStars($totalVotos);
 
@@ -99,6 +104,7 @@ public function totalVotos()
                         'address' => $bar ? $bar->address : 'No asignado',
                         'opening_hours' => $bar ? $bar->opening_hours : 'No asignado',
                         'totalVotos' => $totalVotos,
+                        'comments' => $comentarios,
                         'stars' => $this->convertToStars($totalVotos), // Agregamos la puntuación en estrellas
                     ];
 
