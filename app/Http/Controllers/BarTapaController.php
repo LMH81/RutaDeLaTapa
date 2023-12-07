@@ -132,8 +132,7 @@ public function store(Request $request)
     return redirect()->route('bar_tapa.index')->with('success', 'Relación asignada exitosamente.');
 }
 
-/*------------------------------------------*/
-
+/*----------------------Método Editar --------------------*/
 public function edit($id)
 {
     $barTapa = Bar_Tapa::find($id);
@@ -147,9 +146,7 @@ public function edit($id)
 
     return view('bar_tapa.edit', compact('barTapa', 'bars', 'tapas'));
 }
-
-    
-
+  
 /*-----------------Update----------------------------------*/
 
 public function update(Request $request, $id)
@@ -202,8 +199,7 @@ public function destroy($id)
     return redirect()->route('bar_tapa.index')->with('success', 'Relación eliminada exitosamente.');
 }
 
-
-
+/*----------------------Método Mostrar --------------------------------------------------------------- */
 public function show($id)
 {
     $barTapa = Bar_Tapa::find($id);

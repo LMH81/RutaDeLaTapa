@@ -33,9 +33,14 @@
                     <i class="fa fa-fw fa-lg fa-arrow-left"></i>Tapas
                 </a>&nbsp;&nbsp;&nbsp;&nbsp;
                 <button type="submit" class="btn mt-3 shadow flex-fill"
-                    style="background-color: var(--bs-blue); color: white; border: none; outline: none; border-radius: 3px; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">
-                    Mostrar Ruta
+                    style="background-color: var(--bs-blue); color: white; border: none; outline: none; border-radius: 3px; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);"title="Mostrar ruta">
+                    <i class="fa fa-map-marker"></i>&nbsp;&nbsp;
+                </button>&nbsp;&nbsp;
+                <button id="resetButton" class="btn btn-danger mt-3 shadow flex-fill" style="border-radius: 3px;"
+                    title="Resetear">
+                    <i class="fas fa-undo"></i>
                 </button>
+
             </div>
         </form>
     </div>
@@ -101,11 +106,14 @@
             const selectedMode = document.getElementById('modeSelector').value;
             let profile = 'car'; // Valor por defecto
 
+            // if (selectedMode === 'foot') {
+            //     profile = 'foot';
+            //     routeControl.getRouter().options.profile = profile;
+            // }
             if (selectedMode === 'foot') {
-                profile = 'foot';
-                routeControl.getRouter().options.profile = profile;
+                alert('La opción de ruta a pie aún no está disponible.');
+                return; // Detiene la ejecución de la función cuando se selecciona "Caminando"
             }
-
             fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${startPointAddress}`)
                 .then(response => response.json())
                 .then(data => {
@@ -157,7 +165,11 @@
             };
 
             const success = function(position) {
+                console.log('Posición obtenida:', position);
                 const userLocation = L.latLng(position.coords.latitude, position.coords.longitude);
+
+                routeControl.setWaypoints([]); // Esto elimina los waypoints actuales y reinicia la ruta
+
 
                 routeControl.setWaypoints([
                     userLocation,
@@ -173,6 +185,19 @@
             };
 
             const watchId = navigator.geolocation.watchPosition(success, error, options);
+        });
+        /*---------------------------------------Botón reset-----------------------------------------------------------------------------------*/
+        document.getElementById('resetButton').addEventListener('click', function() {
+            location.reload();
+
+        });
+
+        // document.getElementById('currentLocation').addEventListener('click', function() {
+        //     alert('La función de ubicación actual aún no está disponible.');
+        // });
+
+        document.getElementById('modeSelector').addEventListener('change', function() {
+            alert('La opción de ruta a pie aún no está disponible.');
         });
     </script>
 @endsection

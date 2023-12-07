@@ -18,7 +18,5 @@ public function bars()
     return $this->belongsToMany(Bar::class, 'bar_tapa', 'tapa_id', 'bar_id')->withTimestamps()->withPivot('id');
 }
 
-
-
     
 }

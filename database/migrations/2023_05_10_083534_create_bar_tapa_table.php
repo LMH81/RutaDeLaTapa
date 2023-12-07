@@ -20,13 +20,8 @@ return new class extends Migration
                 
             $table->unsignedBigInteger('tapa_id');     
                       
-            $table->unsignedBigInteger('bar_id');
-                   
-              
-           
-
-            //$table->primary(['tapa_id', 'bar_id']);
-
+            $table->unsignedBigInteger('bar_id');              
+                         
             $table->foreign('bar_id')->references('id')->on('bars')->onDelete('cascade');
             $table->foreign('tapa_id')->references('id')->on('tapas')->onDelete('cascade');
             $table->timestamps();

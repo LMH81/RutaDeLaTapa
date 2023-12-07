@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,11 +11,7 @@ use App\Models\Voto;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
-
-    // const ROLE_ADMINISTRATOR = 1;
-    // const ROLE_USER = 0;
-    
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;    
 
     /**
      * The attributes that are mass assignable.

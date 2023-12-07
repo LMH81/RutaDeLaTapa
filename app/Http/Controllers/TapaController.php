@@ -13,14 +13,7 @@ use PDF;
 class TapaController extends Controller
 {
    
-   /*---------------Muestra una lista paginada de bares----------------- */
-
-//     public function index()
-// {
-//     $tapas = Tapa::paginate();
-//     return view('tapa.index', compact('tapas'))
-//         ->with('i', (request()->input('page', 1) - 1) * $tapas->perPage());
-// }
+   /*---------------Muestra una lista paginada de tapas----------------- */
 
 public function index(Request $request)
 {
@@ -63,7 +56,7 @@ public function pdf()
     /*---------------Crear y guardar---------------------------------- */
     public function store(Request $request)
     {
-        //
+        
          $campos=[
             'name'=> 'required|string|max:1000',
             'img'=>'required|max:10000|mimes:jpg,png,jpg',
@@ -78,7 +71,7 @@ public function pdf()
          ];
 
          $this->validate($request,$campos,$mensaje);
-        //$datosTapas= request()->all();
+       
         $datosTapas= request()->except('_token');
 
         if($request->hasFile('img')){
@@ -86,20 +79,19 @@ public function pdf()
             $datosTapas['img']=$request->file('img')->store('uploads','public');
         }
         Tapa::insert($datosTapas);
-        //return response()->json($datosTapas);
+       
         return redirect('tapa')->with('mensaje','Tapa agregada correctamente');
     }
 
-     /*---------------Mostrar----------------------------------------------*/
-  
+     /*---------------Mostrar----------------------------------------------*/  
     public function show($id)
     {
-        //
+        
         $tapa = Tapa::find($id);
 
         return view('tapa.show', compact('tapa'));
     }
-
+    
   /*---------------Editar----------------------------------------------------- */
     public function edit($id)
     {
@@ -123,22 +115,19 @@ public function pdf()
 
         Tapa::where('id','=',$id)->update($datosTapas);
         $tapa=Tapa::find($id);
-        //return view('tapa.edit',compact('tapa'));
+       
         return redirect('tapa')->with('mensaje','Tapa modificada');
     }
 
   /*---------------Borrar-----------------------------------------------------------*/
     public function destroy($id)
     {
-        //
-
         $tapa=Tapa::find($id);
 
         if(Storage::delete('public/'.$tapa->img)){
             Tapa::destroy($id);
 
-        }
-        
+        }        
         return redirect('tapa')->with('mensaje','Tapa eliminada');
     }
 

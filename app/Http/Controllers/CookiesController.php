@@ -62,7 +62,6 @@ public function index()
         return view('cookies.dashboard', compact('grouped_tapas', 'bar_tapas'));
     }
 
-
 public function totalVotos()
 {
     // Obtén todas las relaciones "bar_tapa" con las relaciones "votos" cargadas
@@ -71,7 +70,6 @@ public function totalVotos()
         ->sortByDesc(function ($barTapa) {
             return $barTapa->votos->sum('rating');
         });
-
     // Pagina los resultados después de ordenarlos
     $perPage = 6;
     $currentPage = request()->input('page', 1);
@@ -106,9 +104,7 @@ public function totalVotos()
                         'totalVotos' => $totalVotos,
                         'comments' => $comentarios,
                         'stars' => $this->convertToStars($totalVotos), // Agregamos la puntuación en estrellas
-                    ];
-
-        
+                    ];        
     }
 
     return view('cookies.dashboard', compact('barTapaWithTotalVotos', 'barTapas'));

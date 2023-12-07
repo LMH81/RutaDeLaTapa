@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .btn-group button {
+        margin-right: 10px;
+    }
+ </style>
     <div class="container" style="margin-top: 20px;">
         <!-- Alerta mensaje -->
         @if (Session::has('mensaje'))
@@ -30,7 +35,8 @@
 
         @if (empty($search))
             <a href="{{ route('bar_tapa.dashboard') }}" class="btn mb-3 mt-3 shadow"
-                style="background-color: #a5b6a5; color: white;"><i class="fa fa-fw fa-lg fa-arrow-left"></i>Dashboard</a>&nbsp;&nbsp;
+                style="background-color: #a5b6a5; color: white;"><i
+                    class="fa fa-fw fa-lg fa-arrow-left"></i>Dashboard</a>&nbsp;&nbsp;
             <a href="{{ url('tapa/create') }}" class="btn"
                 style="background-color: var(--bs-blue); color: white;">Registrar nueva tapa</a>&nbsp;&nbsp;
             <a href="{{ url('tapa/pdf') }}" class="btn btn-success float-right">PDF</a>&nbsp;&nbsp;
@@ -67,13 +73,21 @@
                             <td>{{ $tapa->description }}</td>
                             <td>{{ $tapa->price }} €</td>
                             <td>
-                                <a href="{{ url('/tapa/' . $tapa->id . '/edit') }}" class="btn btn-success">Editar</a> |
-                                <button class="btn btn-danger"
-                                    onclick="confirmDelete('{{ url('/tapa/' . $tapa->id) }}')">Borrar</button>
-                                | <form action="{{ url('/tapa/' . $tapa->id) }}" class="d-inline" method="get">
+                                <div class="btn-group">
+                                <a href="{{ url('/tapa/' . $tapa->id . '/edit') }}" class="btn btn-success"><i
+                                        class="fas fa-edit"></i></a> &nbsp;| &nbsp;
+                                <form action="{{ route('tapa.destroy', $tapa->id) }}" method="POST" class="d-inline">
                                     @csrf
-                                    <input class="btn btn-warning" type="submit" value="Mostrar">
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit" onclick="confirmDelete('{{ route('tapa.destroy', $tapa->id) }}')"><i class="fas fa-trash-alt"></i></button>
                                 </form>
+
+                                &nbsp;| &nbsp;<form action="{{ url('/tapa/' . $tapa->id) }}" class="d-inline" method="get">
+                                    @csrf
+                                    <button class="btn btn-warning" type="submit"><i class="fas fa-eye"
+                                            style="color: white; text-shadow: 1px 1px 1px #000;"></i></button>
+                                </form>
+                            </div>
                             </td>
                         </tr>
                     @endforeach
@@ -90,4 +104,12 @@
 
 @push('scripts')
     <script src="{{ asset('js/search.js') }}"></script>
+
+    <script>
+        function confirmDelete(url) {
+            if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
+                window.location.href = url;
+            }
+        }
+    </script>
 @endpush

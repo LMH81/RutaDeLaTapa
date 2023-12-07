@@ -12,8 +12,7 @@ class Bar extends Model
     protected $perPage = 20;
 
 
-    //Relación muchos a muchos
-  
+    //Relación muchos a muchos  
     public function tapas()
     {
         return $this->belongsToMany(Tapa::class, 'bar_tapa', 'bar_id', 'tapa_id')->withPivot('id')->withTimestamps();

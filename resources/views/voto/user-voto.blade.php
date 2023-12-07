@@ -53,13 +53,13 @@
 
                                 <td class="text-center d-flex">
                                     <a href="{{ route('voto.edit', $votoData['voto']->id) }}"
-                                        class="btn btn-success mr-2">Cambiar Voto</a>
+                                        class="btn btn-success mr-2"><i class="fas fa-edit"></i></a>
                                     &nbsp;|&nbsp;
                                     <form action="{{ route('voto.destroy', $votoData['voto']->id) }}" method="POST"
                                         onsubmit="return confirm('¿Estás seguro de que deseas eliminar este voto?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Borrar</button>
+                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                     </form>
                                 </td>
                             </tr>

@@ -28,6 +28,7 @@ class Bar_Tapa extends Model
     {
         return $this->belongsToMany(Bar::class, 'bar_tapa', 'tapa_id', 'bar_id');
     }
+    
     //un voto se refiere a una tapa_bar especifica
     public function votos()
     {

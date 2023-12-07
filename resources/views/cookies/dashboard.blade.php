@@ -356,20 +356,20 @@
     <!---script para mostrar contenido despues de hacer clic en el botón ver----------------->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-                    let showOpinionsButtons = document.querySelectorAll('.show-opinions-btn');
-                    showOpinionsButtons.forEach(function(button) {
-                            button.addEventListener('click', function() {
-                                    let opinionsSection = this.nextElementSibling;
+            let showOpinionsButtons = document.querySelectorAll('.show-opinions-btn');
+            showOpinionsButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    let opinionsSection = this.nextElementSibling;
 
-
-                                    if (opinionsSection.style.display === 'none' || opinionsSection.style
-                                        .display === '') {
-                                        opinionsSection.style.display = 'table-row';
-                                    } else {
-                                        opinionsSection.style.display = 'none';
-                                    });
-                            });
-                    });
+                    if (opinionsSection.style.display === 'none' || opinionsSection.style
+                        .display === '') {
+                        opinionsSection.style.display = 'table-row';
+                    } else {
+                        opinionsSection.style.display = 'none';
+                    }
+                });
+            });
+        });
     </script>
 
     <style>

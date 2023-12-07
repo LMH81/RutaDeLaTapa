@@ -52,7 +52,7 @@
             <div class="col-md-5 mb-3">
                 <div class="d-flex justify-content-start align-items-center mt-3 ml-3">
                     <a class="btn" style="background-color: var(--bs-blue); color: white;"
-                        href="{{ route('bar.index') }}"><i class="fa fa-fw fa-lg fa-arrow-left"></i>
+                        href="{{ route('bar_tapa.index') }}"><i class="fa fa-fw fa-lg fa-arrow-left"></i>
                         {{ __('Regresar') }}</a>
                 </div>
             </div>

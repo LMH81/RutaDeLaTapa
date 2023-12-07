@@ -24,7 +24,6 @@ class MapController extends Controller
      }
 
 
-
     public function getCoordinates($id)
 {
     $barTapa = Bar_Tapa::find($id);

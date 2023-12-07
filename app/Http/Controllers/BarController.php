@@ -109,13 +109,7 @@ class BarController extends Controller
      /*---------------Borrar------------------ */
     public function destroy($id)
     {
-        //
-        // $bar = Bar::find($id)->delete();
-
-        // return redirect()->route('bar.index')
-        //     ->with('success', 'Bar eliminado correctamente');
-   
-
+         
          $bar = Bar::find($id);
 
         if ($bar) {
@@ -147,8 +141,5 @@ public function getCoordinates($barId)
     return response()->json($coordinates);
 }
 
-
-
- 
 
 }
