@@ -7,9 +7,6 @@
             @csrf
             @include('tapa.form', ['modo' => 'Añadir'])
 
-
-
-
         </form>
     </div>
 @endsection

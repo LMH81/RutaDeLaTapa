@@ -61,13 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     /*---------------------Rutas BarController-------------------------------------*/ 
     Route::get('/bar/pdf', [App\Http\Controllers\BarController::class, 'pdf'])->name('bar.pdf'); 
-    //Route::resource('bar', 'App\Http\Controllers\BarController');
-    // Route::get('/bars/{id}', 'BarController@show');     // En routes/web.php
-    //Route::get('/bars/{id}/show-map', [BarController::class, 'showMap'])->name('bar.showMap');
-   
-
-    Route::get('/bar/{barId}/coordinates', [BarController::class, 'getCoordinates']);
-    
+    Route::get('/bar/{barId}/coordinates', [BarController::class, 'getCoordinates']);      
     Route::get('/bars', [BarController::class, 'index'])->name('bar.index'); 
     Route::get('/bars/create', [BarController::class, 'create'])->name('bar.create');  
     Route::post('/bars', [BarController::class, 'store'])->name('bar.store');

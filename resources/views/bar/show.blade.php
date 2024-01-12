@@ -60,6 +60,7 @@
     </section>
 
     <script>
+        // Definición de la URL de los azulejos (tiles) de OpenStreetMap
         const titleProvider = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
         const barId = document.querySelector('.col-md-5').dataset.barId;
@@ -68,10 +69,12 @@
         fetch(`/bar/${barId}/coordinates`)
             .then(response => response.json())
             .then(data => {
-                let myMap = L.map('myMap').setView([data.latitude, data.longitude], 18);
+                let myMap = L.map('myMap').setView([data.latitude, data.longitude], 10);
+                myMap.setMinZoom(5);
+
                 L.tileLayer(titleProvider, {
                     maxZoom: 19,
-                    attribution: 'Leaflet &copy; <a href="http://www.openstreetmap.org/copyright">RutaDeLaTapa</a>'
+                    attribution: 'Leaflet &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 }).addTo(myMap);
 
                 const marker = L.marker([data.latitude, data.longitude]).addTo(myMap);
@@ -107,7 +110,7 @@
                     radius: accuracy
                 }).addTo(myMap);
 
-                // Ajustar el mapa al círculo si no se ha ampliado previamente
+                // Ajustar el mapa al círculo 
                 let zoomed = false;
                 if (!zoomed) {
                     zoomed = myMap.fitBounds(circle.getBounds());

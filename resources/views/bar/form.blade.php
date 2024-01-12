@@ -55,6 +55,20 @@
                 id="opening_hours">
         </div>
     </div>
+    <div class="form-group">
+        <div class="mb-3">
+            <label for="latitude" class="form-label"><strong>Latitud</strong></label>
+            <input type="text" class="form-control" name="latitude"
+                value="{{ isset($bar->latitude) ? $bar->latitude : old('latitude') }}" id="latitude">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="mb-3">
+            <label for="longitude" class="form-label"><strong>Longitud</strong></label>
+            <input type="text" class="form-control" name="longitude"
+                value="{{ isset($bar->longitude) ? $bar->longitude : old('longitude') }}" id="longitude">
+        </div>
+    </div>
 
     <a href="{{ url('bars/') }}" class="btn" style="background-color: var(--bs-blue);color:white;"><i
             class="fa fa-fw fa-lg fa-arrow-left"></i>Regresar</a>

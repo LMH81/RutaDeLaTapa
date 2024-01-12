@@ -58,7 +58,7 @@
 
         L.tileLayer(tileProvider, {
             maxZoom: 18,
-            attribution: 'Leafletjs&copy; <a href="https://www.openstreetmap.org/copyright">RutaDeLaTapa</a> contributors'
+            attribution: 'Leafletjs&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
         let marker = L.marker(initialPoint, {
@@ -105,11 +105,7 @@
             const startPointAddress = document.getElementById('start').value;
             const selectedMode = document.getElementById('modeSelector').value;
             let profile = 'car'; // Valor por defecto
-
-            // if (selectedMode === 'foot') {
-            //     profile = 'foot';
-            //     routeControl.getRouter().options.profile = profile;
-            // }
+            
             if (selectedMode === 'foot') {
                 alert('La opción de ruta a pie aún no está disponible.');
                 return; // Detiene la ejecución de la función cuando se selecciona "Caminando"
@@ -190,11 +186,7 @@
         document.getElementById('resetButton').addEventListener('click', function() {
             location.reload();
 
-        });
-
-        // document.getElementById('currentLocation').addEventListener('click', function() {
-        //     alert('La función de ubicación actual aún no está disponible.');
-        // });
+        });        
 
         document.getElementById('modeSelector').addEventListener('change', function() {
             alert('La opción de ruta a pie aún no está disponible.');

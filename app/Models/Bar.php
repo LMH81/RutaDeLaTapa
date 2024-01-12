@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Bar extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description', 'address', 'phone', 'opening_hours'];
+    protected $fillable = ['name', 'description', 'address', 'phone', 'opening_hours', 'latitude',
+    'longitude'];
     protected $perPage = 20;
 
 
@@ -27,7 +28,11 @@ class Bar extends Model
            'description' => 'required|string|max:2000',
            'address' => 'required|string|max:1000',
            'phone' => 'required|string|max:20',
-           'opening_hours' => 'required|string|max:1000'
+           'opening_hours' => 'required|string|max:1000',
+           'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric'
        ];
    }
+
+   
 }

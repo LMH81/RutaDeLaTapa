@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use PDF;
 use Illuminate\Support\Facades\View;
 
+
 class BarController extends Controller
 {
     
@@ -63,8 +64,26 @@ class BarController extends Controller
             'address' => 'required|max:255',
             'phone' => 'required|max:20',
             'opening_hours' => 'required|max:255',
+            'latitude' => 'required|numeric', // Validación para la latitud
+            'longitude' => 'required|numeric'// Validación para la longitude
         ]);
-    
+
+// // Obtener las coordenadas de la dirección
+// $coordinates = $this->geocodeAddress($validatedData['address']);
+
+// // Asegúrate de que las coordenadas se hayan obtenido correctamente
+// if ($coordinates) {
+//     // Añadir las coordenadas al array de datos validados
+//     $validatedData['latitude'] = $coordinates['latitude'];
+//     $validatedData['longitude'] = $coordinates['longitude'];
+// } else {
+//     // Si no se pudieron obtener las coordenadas, establecer valores por defecto o manejar el error
+//     // Por ejemplo:
+//     $validatedData['latitude'] = 0.0;
+//     $validatedData['longitude'] = 0.0;
+// }
+
+     // Crear el bar con los datos validados
         $bar = Bar::create($validatedData);
     
         return redirect()->route('bar.index')
@@ -75,7 +94,7 @@ class BarController extends Controller
    
  public function show($id)
  {
-     //
+     
      $bar = Bar::find($id);
 
      return view('bar.show', compact('bar'));
@@ -141,5 +160,37 @@ public function getCoordinates($barId)
     return response()->json($coordinates);
 }
 
+/*--------------------------------------Obtencion coordenadas ----------------------- */
+
+// Función para geocodificar la dirección y obtener las coordenadas
+// function geocodeAddress($address)
+// {
+//     $url = 'https://nominatim.openstreetmap.org/search?format=json&q=' . urlencode($address);
+
+//     // Realizar la solicitud a la API para obtener los datos de geolocalización
+//     $response = file_get_contents($url);
+
+//     // Verificar si la respuesta es válida
+//     if ($response) {
+//         $data = json_decode($response, true);
+
+//         if (!empty($data) && isset($data[0]['lat']) && isset($data[0]['lon'])) {
+//             $latitude = $data[0]['lat'];
+//             $longitude = $data[0]['lon'];
+
+//             return [
+//                 'latitude' => $latitude,
+//                 'longitude' => $longitude,
+//             ];
+//         }
+//     }
+
+//     return null; // Devolver null si no se pudieron obtener las coordenadas
+// }
+
+
 
 }
+
+
+ 
